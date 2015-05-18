@@ -3,16 +3,7 @@
 socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
     var requester = {};
 
-    requester.register = function (username, password, confirmPassword, name, email) {
-        //changes: get the data as parameter?
-        var data = {
-            username: username,
-            password: password,
-            confirmPassword: confirmPassword,
-            name: name,
-            email: email
-        };
-
+    requester.register = function (data) {
         var url = BASE_URL + 'users/register';
 
         var deferred = $q.defer();
@@ -26,13 +17,7 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
             });
     };
 
-    requester.login = function (username, password) {
-        //changes: get the data as parameter?
-        var data = {
-            username: username,
-            password: password
-        };
-
+    requester.login = function (data) {
         var url = BASE_URL + 'users/login';
 
         var deferred = $q.defer();
