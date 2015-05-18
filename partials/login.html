@@ -1,7 +1,16 @@
 <div class="login">
     <form ng-submit="login()">
-        <input type="text" required placeholder="Username" ng-model="loginData.username" />
-        <input type="password" required ng-model="loginData.password" />
-        <input type="submit" />
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" required placeholder="Username" ng-model="loginData.username" />
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Password" ng-model="loginData.password" />
+        </div>
+        <div>
+            <input type="submit" />
+            <a href="#/register">Register</a>
+        </div>
     </form>
 </div>
