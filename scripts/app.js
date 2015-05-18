@@ -1,8 +1,8 @@
-/* exported app */
+/* exported socialNetwork */
 
-var app = angular.module('SocialNetwork', ['ngRoute']);
+var socialNetwork = angular.module('SocialNetwork', ['ngRoute']);
 
-app.config(function ($routeProvider) {
+socialNetwork.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'partials/wellcome.html'
     });

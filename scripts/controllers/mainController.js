@@ -1,5 +1,5 @@
-/* global app */
+/* global socialNetwork */
 
-app.controller('MainController', function ($scope) {
+socialNetwork.controller('MainController', function ($scope) {
 
 });
