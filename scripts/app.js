@@ -13,5 +13,9 @@ socialNetwork.config(function ($routeProvider) {
         .when('/login', {
             templateUrl: 'partials/login.html',
             controller: 'authenticationController'
+        })
+        .when('/register', {
+            templateUrl: 'partials/register.html',
+            controller: 'authenticationController'
         });
 });
