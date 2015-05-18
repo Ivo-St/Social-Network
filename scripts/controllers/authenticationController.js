@@ -13,4 +13,17 @@ socialNetwork.controller('authenticationController', function ($scope, userAuthe
                 console.log(error);
             });
     };
+
+    $scope.register = function () {
+        userAuthentication.register($scope.registerData)
+            .then(function (data) {
+                //future: replace with noty
+                alert('Succsesful register. Username: (' + data.userName + ')');
+                userAuthentication.saveCredentials(data);
+            }, function (error) {
+                //future: replace with noty
+                alert(error.message);
+                console.log(error);
+            });
+    };
 });
