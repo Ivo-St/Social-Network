@@ -26,4 +26,16 @@ socialNetwork.controller('authenticationController', function ($scope, userAuthe
                 console.log(error);
             });
     };
+
+    $scope.logout = function () {
+        userAuthentication.logout()
+            .then(function (data) {
+                //future: replace with noty
+                alert(data.message);
+                userAuthentication.clearCredentials();
+            }, function (data) {
+                //future: replace with noty
+                alert(data.message);
+            });
+    };
 });
