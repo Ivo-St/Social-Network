@@ -1,4 +1,5 @@
-/*exported app*/
+/* exported app */
+
 var app = angular.module('SocialNetwork', ['ngRoute']);
 
 app.config(function ($routeProvider) {
