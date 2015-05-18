@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.factory('UserAuthentication', function ($http, $q, BASE_URL) {
+socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
     var requester = {};
 
     requester.register = function (username, password, confirmPassword, name, email) {
