@@ -1,9 +1,9 @@
-/* global socialNetwork */
+/* global socialNetwork, sessionStorage */
 
 socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
-    var requester = {};
+    var userService = {};
 
-    requester.register = function (data) {
+    userService.register = function (data) {
         var url = BASE_URL + 'users/register';
 
         var deferred = $q.defer();
@@ -15,9 +15,11 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
             .error(function (data) {
                 deferred.reject(data);
             });
+
+        return deferred.promise;
     };
 
-    requester.login = function (data) {
+    userService.login = function (data) {
         var url = BASE_URL + 'users/login';
 
         var deferred = $q.defer();
@@ -29,5 +31,13 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
             .error(function (data) {
                 deferred.reject(data);
             });
+        return deferred.promise;
     };
+
+    userService.saveCredentials = function (data) {
+        sessionStorage.username = data.userName;
+        sessionStorage.accessToken = data.access_token;
+    };
+
+    return userService;
 });
