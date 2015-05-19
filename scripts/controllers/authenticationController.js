@@ -79,6 +79,7 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
             });
     };
 
+    // fixme: find a better way to load the profile data
     $scope.loadProfileData = function () {
 
         // todo consider using the sessionStorage
