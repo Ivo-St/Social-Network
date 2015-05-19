@@ -6,6 +6,8 @@ var socialNetwork = angular.module('SocialNetwork', ['ngRoute']);
 socialNetwork.constant('BASE_URL', 'http://softuni-social-network.azurewebsites.net/api/');
 
 socialNetwork.config(function ($routeProvider) {
+
+    // fixme: implement route security
     $routeProvider
         .when('/', {
             templateUrl: 'partials/wellcome.html'
@@ -18,9 +20,9 @@ socialNetwork.config(function ($routeProvider) {
             templateUrl: 'partials/register.html',
             controller: 'authenticationController'
         })
-        .when('/editProfile', {
+        .when('/user/editProfile', {
             templateUrl: 'partials/edit-profile.html',
-            controller: 'authenticationController'
+            controller: 'authenticationController',
         })
         .otherwise({
             redirectTo: '/'
