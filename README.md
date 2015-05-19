@@ -1,2 +1,2 @@
 # Social-Network
-Course project for JavaScript Frameworks course
+Course project for JavaScript Frameworks course.
