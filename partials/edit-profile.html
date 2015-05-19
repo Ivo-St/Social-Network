@@ -1,5 +1,5 @@
 <div ng-init="loadProfileData()">
-    <form>
+    <form ng-submit="editProfile()">
         <div>
             <label for="name">Name</label>
             <input type="text" id="name" required placeholder="Name" ng-model="ownProfileData.name" />
@@ -17,8 +17,12 @@
             <input type="radio" name="gender" id="2" value="2" ng-model="ownProfileData.gender" />
         </div>
         <div>
-            <img ng-src="{{ownProfileData.profileImage}}" />
-            <input type="file" accept=".jpg" ng-model="ownProfileData.profileImage" />
+            <img ng-src="data:image/jpeg;base64,{{ownProfileData.profileImageData}}" />
+            <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
+        </div>
+        <div>
+            <img ng-src="data:image/jpeg;base64,{{ownProfileData.coverImageData}}" />
+            <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
         </div>
         <input type="submit" />
     </form>
