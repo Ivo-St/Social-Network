@@ -2,7 +2,7 @@
 
 var socialNetwork = angular.module('SocialNetwork', ['ngRoute']);
 
-//future: move the constants to another file
+// future: move the constants to another file
 socialNetwork.constant('BASE_URL', 'http://softuni-social-network.azurewebsites.net/api/');
 
 socialNetwork.config(function ($routeProvider) {
@@ -16,6 +16,10 @@ socialNetwork.config(function ($routeProvider) {
         })
         .when('/register', {
             templateUrl: 'partials/register.html',
+            controller: 'authenticationController'
+        })
+        .when('/editProfile', {
+            templateUrl: 'partials/edit-profile.html',
             controller: 'authenticationController'
         })
         .otherwise({
