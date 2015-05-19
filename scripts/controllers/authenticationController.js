@@ -1,5 +1,7 @@
 /* global socialNetwork, sessionStorage */
 
+// fixme: move login and register into seperate controllers?
+
 socialNetwork.controller('authenticationController', function ($scope, $q, userAuthentication) {
     $scope.login = function () {
         userAuthentication.login($scope.loginData)
@@ -56,7 +58,7 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
             .then(function (data) {
                 userAuthentication.saveUserData(data);
 
-                // changes move this?
+                // changes move this ($scope.ownProfileData)?
                 $scope.ownProfileData = data;
                 $scope.ownProfileData.profileImage = 'data:image/jpeg;base64,' + data.profileImageData;
                 console.log(data);
