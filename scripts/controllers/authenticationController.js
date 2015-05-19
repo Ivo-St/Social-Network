@@ -1,4 +1,4 @@
-/* global socialNetwork, sessionStorage */
+/* global socialNetwork */
 
 // fixme: move login and register into seperate controllers?
 
@@ -66,8 +66,9 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
             });
     };
 
-    // fixme: fix the pictures preview and submit
+    // fixme: implement html encoding and fix the pictures preview and submit
     $scope.editProfile = function () {
+
         userAuthentication.editProfile($scope.ownProfileData)
             .then(function (data) {
 
