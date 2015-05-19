@@ -55,6 +55,8 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
         userAuthentication.getOwnProfileData()
             .then(function (data) {
                 userAuthentication.saveUserData(data);
+
+                // changes move this?
                 $scope.ownProfileData = data;
                 $scope.ownProfileData.profileImage = 'data:image/jpeg;base64,' + data.profileImageData;
                 console.log(data);
@@ -65,7 +67,7 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
 
     $scope.loadProfileData = function () {
 
-        // todo consider using the sessionStorage
+        // todo consider using the sessionStorage!
         $scope.getOwnProfileData();
     };
 });
