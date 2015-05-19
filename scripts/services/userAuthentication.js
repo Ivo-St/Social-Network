@@ -56,6 +56,7 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    // fixme: move the profile functions to another class?
     userService.getOwnProfileData = function () {
         var deferred = $q.defer();
 
@@ -84,6 +85,7 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         sessionStorage.accessToken = data.access_token;
     };
 
+    // changes: consider saving the information localy
     userService.saveUserData = function (data) {
 
         // todo: see if I need the username
