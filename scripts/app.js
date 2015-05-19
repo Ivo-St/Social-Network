@@ -17,5 +17,8 @@ socialNetwork.config(function ($routeProvider) {
         .when('/register', {
             templateUrl: 'partials/register.html',
             controller: 'authenticationController'
+        })
+        .otherwise({
+            redirectTo: '/'
         });
 });
