@@ -60,8 +60,20 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
 
                 // changes move this ($scope.ownProfileData)?
                 $scope.ownProfileData = data;
-                $scope.ownProfileData.profileImage = 'data:image/jpeg;base64,' + data.profileImageData;
                 console.log(data);
+            }, function (data) {
+                console.log(data);
+            });
+    };
+
+    // fixme: fix the pictures preview and submit
+    $scope.editProfile = function () {
+        userAuthentication.editProfile($scope.ownProfileData)
+            .then(function (data) {
+
+                // future: replace with noty
+                alert(data.message);
+                userAuthentication.saveUserData($scope.ownProfileData);
             }, function (data) {
                 console.log(data);
             });
@@ -69,7 +81,7 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
 
     $scope.loadProfileData = function () {
 
-        // todo consider using the sessionStorage!
+        // todo consider using the sessionStorage
         $scope.getOwnProfileData();
     };
 });
