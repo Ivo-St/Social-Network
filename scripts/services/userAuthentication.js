@@ -80,15 +80,37 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    userService.editProfile = function (data) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'PUT',
+            url: BASE_URL + 'me',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            },
+            data: data
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     userService.saveCredentials = function (data) {
         sessionStorage.username = data.userName;
         sessionStorage.accessToken = data.access_token;
     };
 
-    // changes: consider saving the information localy
+    // todo: do i need to save the user's data localy
     userService.saveUserData = function (data) {
 
-        // todo: see if I need the username
         sessionStorage.ownProfileData = JSON.stringify({
             username: data.username,
             name: data.name,
