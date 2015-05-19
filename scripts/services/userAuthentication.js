@@ -74,13 +74,27 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
             .error(function (data) {
                 deferred.reject(data);
             });
-        //changes: consider saving the information localy
+
+        // changes: consider saving the information localy
         return deferred.promise;
     };
 
     userService.saveCredentials = function (data) {
         sessionStorage.username = data.userName;
         sessionStorage.accessToken = data.access_token;
+    };
+
+    userService.saveUserData = function (data) {
+
+        // todo: see if I need the username
+        sessionStorage.ownProfileData = JSON.stringify({
+            username: data.username,
+            name: data.name,
+            gender: data.gender,
+            email: data.email,
+            profileImage: data.profileImageData,
+            coverImage: data.coverImageData
+        });
     };
 
     userService.clearCredentials = function () {
