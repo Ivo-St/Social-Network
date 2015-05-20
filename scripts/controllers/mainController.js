@@ -1,6 +1,18 @@
 /* global socialNetwork */
 
-socialNetwork.controller('mainController', function ($scope) {
+socialNetwork.controller('mainController', function ($scope, userAuthentication) {
 
-    // todo: implement get picture from file directive
+    // fixme: is this a good place for the function getOwnProfileData
+    $scope.getOwnProfileData = function () {
+        userAuthentication.getOwnProfileData()
+            .then(function (data) {
+                userAuthentication.saveUserData(data);
+
+                // changes move this ($scope.ownProfileData)?
+                $scope.ownProfileData = data;
+                console.log(data);
+            }, function (data) {
+                console.log(data);
+            });
+    };
 });
