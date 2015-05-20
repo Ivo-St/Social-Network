@@ -169,5 +169,9 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         sessionStorage.removeItem('accessToken');
     };
 
+    userService.clearUserData = function () {
+        sessionStorage.removeItem('ownProfileData');
+    };
+
     return userService;
 });
