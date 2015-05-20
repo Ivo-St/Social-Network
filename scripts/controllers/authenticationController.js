@@ -1,20 +1,18 @@
 /* global socialNetwork */
 
-socialNetwork.controller('authenticationController', function ($scope, userAuthentication) {
+socialNetwork.controller('authenticationController', function ($scope, userAuthentication, notifyService) {
     $scope.login = function () {
         userAuthentication.login($scope.loginData)
             .then(function (data) {
+                notifyService.success('Succsesful login. Username: (' + data.userName + ')');
 
-                // future: replace with noty
-                alert('Succsesful login. Username: (' + data.userName + ')');
                 userAuthentication.saveCredentials(data);
 
                 // changes: see if this can be loaded in a better place
                 $scope.getOwnProfileData();
             }, function (error) {
 
-                // future: replace with noty
-                alert(error.error_description);
+                notifyService.error(error.error_description);
                 console.log(error);
             });
     };
@@ -22,17 +20,14 @@ socialNetwork.controller('authenticationController', function ($scope, userAuthe
     $scope.register = function () {
         userAuthentication.register($scope.registerData)
             .then(function (data) {
+                notifyService.success('Succsesful register. Username: (' + data.userName + ')');
 
-                // future: replace with noty
-                alert('Succsesful register. Username: (' + data.userName + ')');
                 userAuthentication.saveCredentials(data);
 
                 // changes: see if this can be loaded in a better place
                 $scope.getOwnProfileData();
             }, function (error) {
-
-                // future: replace with noty
-                alert(error.message);
+                notifyService.error(error.message);
                 console.log(error);
             });
     };
@@ -40,15 +35,12 @@ socialNetwork.controller('authenticationController', function ($scope, userAuthe
     $scope.logout = function () {
         userAuthentication.logout()
             .then(function (data) {
+                notifyService.success(data.message);
 
-                // future: replace with noty
-                alert(data.message);
                 userAuthentication.clearCredentials();
                 userAuthentication.clearUserData();
             }, function (data) {
-
-                // future: replace with noty
-                alert(data.message);
+                notifyService.error(data.message);
             });
     };
 });
