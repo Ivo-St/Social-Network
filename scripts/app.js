@@ -22,11 +22,15 @@ socialNetwork.config(function ($routeProvider) {
         })
         .when('/user/editProfile', {
             templateUrl: 'partials/edit-profile.html',
-            controller: 'authenticationController',
+            controller: 'userController',
         })
         .when('/user/changePassword', {
             templateUrl: 'partials/change-password.html',
-            controller: 'authenticationController',
+            controller: 'userController',
+        })
+        .when('/user/friends', {
+            templateUrl: 'partials/friends.html',
+            controller: 'userController',
         })
         .otherwise({
             redirectTo: '/'
