@@ -1,0 +1,15 @@
+<div ng-init="getUserFriends()">
+    <div>
+        <span>
+            <span>{{fullName}}</span> - Friends ({{friends.numbetOfFriends}} in total)
+        </span>
+    </div>
+    <div>
+        <ul>
+            <li ng-repeat="friend in friends">
+                <img ng-src="{{friend.profileImageData}}" />
+                <p>{{friend.name}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
