@@ -44,6 +44,7 @@ socialNetwork.controller('authenticationController', function ($scope, userAuthe
                 // future: replace with noty
                 alert(data.message);
                 userAuthentication.clearCredentials();
+                userAuthentication.clearUserData();
             }, function (data) {
 
                 // future: replace with noty
