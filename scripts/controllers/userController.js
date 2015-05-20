@@ -28,9 +28,6 @@ socialNetwork.controller('userController', function ($scope, $document, userAuth
     };
 
     $scope.getUserFriends = function () {
-
-        // fixme: find another way to implement this
-        $scope.fullName = JSON.parse(sessionStorage.ownProfileData).name;
         userAuthentication.getFriends()
             .then(function (data) {
                 $scope.friends = data;
@@ -38,6 +35,13 @@ socialNetwork.controller('userController', function ($scope, $document, userAuth
             }, function (data) {
                 console.log(data);
             });
+    };
+
+    $scope.prepareDataForFriendsPage = function () {
+
+        // fixme: find another way to implement this
+        $scope.fullName = JSON.parse(sessionStorage.ownProfileData).name;
+        $scope.getUserFriends();
     };
 
     // fixme: find a better way to load the profile data
