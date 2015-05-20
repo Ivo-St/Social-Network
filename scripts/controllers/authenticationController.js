@@ -1,8 +1,6 @@
 /* global socialNetwork */
 
-// fixme: move login and register into seperate controllers?
-
-socialNetwork.controller('authenticationController', function ($scope, $q, userAuthentication) {
+socialNetwork.controller('authenticationController', function ($scope, userAuthentication) {
     $scope.login = function () {
         userAuthentication.login($scope.loginData)
             .then(function (data) {
@@ -51,50 +49,5 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
                 // future: replace with noty
                 alert(data.message);
             });
-    };
-
-    $scope.getOwnProfileData = function () {
-        userAuthentication.getOwnProfileData()
-            .then(function (data) {
-                userAuthentication.saveUserData(data);
-
-                // changes move this ($scope.ownProfileData)?
-                $scope.ownProfileData = data;
-                console.log(data);
-            }, function (data) {
-                console.log(data);
-            });
-    };
-
-    // fixme: implement html encoding and fix the pictures preview and submit
-    $scope.editProfile = function () {
-        userAuthentication.editProfile($scope.ownProfileData)
-            .then(function (data) {
-
-                // future: replace with noty
-                alert(data.message);
-                userAuthentication.saveUserData($scope.ownProfileData);
-            }, function (data) {
-                console.log(data);
-            });
-    };
-
-    // todo: rename the function
-    $scope.changePasswordFn = function () {
-        userAuthentication.changePassword($scope.changePassword)
-            .then(function (data) {
-
-                // future: replace with noty
-                alert(data.message);
-            }, function (data) {
-                console.log(data);
-            });
-    };
-
-    // fixme: find a better way to load the profile data
-    $scope.loadProfileData = function () {
-
-        // todo consider using the sessionStorage
-        $scope.getOwnProfileData();
     };
 });
