@@ -24,6 +24,10 @@ socialNetwork.config(function ($routeProvider) {
             templateUrl: 'partials/edit-profile.html',
             controller: 'authenticationController',
         })
+        .when('/user/changePassword', {
+            templateUrl: 'partials/change-password.html',
+            controller: 'authenticationController',
+        })
         .otherwise({
             redirectTo: '/'
         });
