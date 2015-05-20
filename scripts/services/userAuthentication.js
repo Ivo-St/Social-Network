@@ -1,5 +1,6 @@
 /* global socialNetwork, sessionStorage */
 
+// future: separate the user's request from the authentication's requests
 socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
     var userService = {};
 
@@ -56,7 +57,6 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
-    // fixme: move the profile functions to another class?
     userService.getOwnProfileData = function () {
         var deferred = $q.defer();
 
@@ -76,7 +76,6 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
                 deferred.reject(data);
             });
 
-        // changes: consider saving the information localy
         return deferred.promise;
     };
 
@@ -151,7 +150,6 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         sessionStorage.accessToken = data.access_token;
     };
 
-    // todo: do i need to save the user's data localy
     userService.saveUserData = function (data) {
 
         sessionStorage.ownProfileData = JSON.stringify({
