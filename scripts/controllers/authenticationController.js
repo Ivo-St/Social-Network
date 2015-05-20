@@ -68,13 +68,24 @@ socialNetwork.controller('authenticationController', function ($scope, $q, userA
 
     // fixme: implement html encoding and fix the pictures preview and submit
     $scope.editProfile = function () {
-
         userAuthentication.editProfile($scope.ownProfileData)
             .then(function (data) {
 
                 // future: replace with noty
                 alert(data.message);
                 userAuthentication.saveUserData($scope.ownProfileData);
+            }, function (data) {
+                console.log(data);
+            });
+    };
+
+    // todo: rename the function
+    $scope.changePasswordFn = function () {
+        userAuthentication.changePassword($scope.changePassword)
+            .then(function (data) {
+
+                // future: replace with noty
+                alert(data.message);
             }, function (data) {
                 console.log(data);
             });
