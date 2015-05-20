@@ -125,6 +125,27 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    userService.getFriends = function () {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'GET',
+            url: BASE_URL + 'me/friends',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            }, function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     userService.saveCredentials = function (data) {
         sessionStorage.username = data.userName;
         sessionStorage.accessToken = data.access_token;
