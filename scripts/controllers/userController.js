@@ -1,16 +1,16 @@
 /* global socialNetwork, sessionStorage */
 
-socialNetwork.controller('userController', function ($scope, $document, userAuthentication) {
+socialNetwork.controller('userController', function ($scope, $document, userAuthentication, notifyService) {
 
     // fixme: implement html encoding and fix the pictures preview and submit
     $scope.editProfile = function () {
         userAuthentication.editProfile($scope.ownProfileData)
             .then(function (data) {
+                notifyService.success(data.message);
 
-                // future: replace with noty
-                alert(data.message);
                 userAuthentication.saveUserData($scope.ownProfileData);
             }, function (data) {
+                notifyService.error(data.message);
                 console.log(data);
             });
     };
@@ -19,10 +19,11 @@ socialNetwork.controller('userController', function ($scope, $document, userAuth
     $scope.changePasswordFn = function () {
         userAuthentication.changePassword($scope.changePassword)
             .then(function (data) {
+                notifyService.success(data.message);
 
-                // future: replace with noty
                 alert(data.message);
             }, function (data) {
+                notifyService.error(data.message);
                 console.log(data);
             });
     };
