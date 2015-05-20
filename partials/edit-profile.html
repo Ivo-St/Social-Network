@@ -17,11 +17,11 @@
             <input type="radio" name="gender" id="2" value="2" ng-model="ownProfileData.gender" />
         </div>
         <div>
-            <img ng-src="data:image/jpeg;base64,{{ownProfileData.profileImageData}}" />
+            <img ng-src="{{ownProfileData.profileImageData}}" />
             <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
         </div>
         <div>
-            <img ng-src="data:image/jpeg;base64,{{ownProfileData.coverImageData}}" />
+            <img ng-src="{{ownProfileData.coverImageData}}" />
             <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
         </div>
         <input type="submit" />
