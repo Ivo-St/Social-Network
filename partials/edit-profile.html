@@ -3,32 +3,37 @@
         <h3>Edit Profile</h3>
     </div>
     <form ng-submit="editProfile()">
-        <div id="profileImage">
-            <h4 class="imageCaption">Profile image</h4>
-            <img ng-src="{{ownProfileData.profileImageData}}" />
-            <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
+        <div id="images">
+            <div id="profileImage">
+                <h4 class="imageCaption">Profile image</h4>
+                <img ng-src="{{ownProfileData.profileImageData}}" />
+                <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
+            </div>
+            <div id="coverImage">
+                <h4 class="imageCaption">Cover image</h4>
+                <img ng-src="{{ownProfileData.coverImageData}}" />
+                <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
+            </div>
         </div>
-        <div id="coverImage">
-            <h4 class="imageCaption">Cover image</h4>
-            <img ng-src="{{ownProfileData.coverImageData}}" />
-            <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
+        <div id="forms">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" required placeholder="Name" ng-model="ownProfileData.name" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" required placeholder="myemail@example.com" ng-model="ownProfileData.email" />
+            </div>
+            <h4>Gender:</h4>
+            <div class="form-group gender">
+                <label for="0">Other</label>
+                <input type="radio" name="gender" id="0" value="0" ng-model="ownProfileData.gender" />
+                <label for="1">Male</label>
+                <input type="radio" name="gender" id="1" value="1" ng-model="ownProfileData.gender" />
+                <label for="2">Female</label>
+                <input type="radio" name="gender" id="2" value="2" ng-model="ownProfileData.gender" />
+            </div>
         </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" class="form-control" required placeholder="Name" ng-model="ownProfileData.name" />
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" class="form-control" required placeholder="myemail@example.com" ng-model="ownProfileData.email" />
-        </div>
-        <div class="form-group">
-            <label for="0">Other</label>
-            <input type="radio" name="gender" id="0" value="0" ng-model="ownProfileData.gender" />
-            <label for="1">Male</label>
-            <input type="radio" name="gender" id="1" value="1" ng-model="ownProfileData.gender" />
-            <label for="2">Female</label>
-            <input type="radio" name="gender" id="2" value="2" ng-model="ownProfileData.gender" />
-        </div>
-        <input type="submit" class="btn btn-lg btn-danger" value="Edit profile" />
+        <input type="submit" class="btn btn-lg btn-danger submitEdit" value="Edit profile" />
     </form>
 </div>
