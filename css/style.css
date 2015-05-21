@@ -1,9 +1,9 @@
 html {
-    background-color: #EDF0F5;
+    background-color: #D7D7D7;
 }
 
 body {
-    background-color: #EDF0F5;
+    background-color: #D7D7D7;
 }
 
 .wellcome {
@@ -69,4 +69,60 @@ label {
 input[type="submit"],
 input[type="button"] {
     font-family: 'Indie Flower', cursive;
+}
+
+.friendsWrapper {
+    margin-top: 2%;
+}
+
+#userInfo {
+    background-color: #F4F4F4;
+    margin-bottom: 1%;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    -webkit-box-shadow: 0px 3px 8px 1px rgba(50, 50, 50, 0.78);
+    -moz-box-shadow: 0px 3px 8px 1px rgba(50, 50, 50, 0.78);
+    box-shadow: 0px 3px 8px 1px rgba(50, 50, 50, 0.78);
+}
+
+#userInfo #filter {
+    display: inline-block;
+    float: right;
+    margin: 3%;
+}
+
+#userInfo h3 {
+    margin: 2%;
+    font-size: 30px;
+    display: inline-block;
+}
+
+#friendsList {
+    margin-top: 2%;
+    text-align: center;
+}
+
+#friend {
+    padding: 2%;
+    margin: 2%;
+    display: inline-block;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(50, 50, 50, 1);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(50, 50, 50, 1);
+    box-shadow: 0px 0px 2px 1px rgba(50, 50, 50, 1);
+}
+
+#friend img {
+    border-radius: 100%;
+    border: 1px solid;
+    width: 102px;
+    height: 102px;
+}
+
+#friend p {
+    font-size: 20px;
+    margin-top: 5%;
+    margin-bottom: 0;
 }
