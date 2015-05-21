@@ -15,7 +15,7 @@ socialNetwork.factory('notifyService', function () {
         speed: 500
     };
     $.noty.defaults.layout = 'topCenter';
-    $.noty.defaults.timeout = 1900;
+    $.noty.defaults.timeout = 4000;
 
     notification.success = function (message) {
         noty({
