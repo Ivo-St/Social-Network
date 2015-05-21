@@ -51,6 +51,16 @@ socialNetwork.controller('userController', function ($scope, $document, userAuth
         // todo consider using the sessionStorage
         $scope.getOwnProfileData();
     };
+    $scope.uploadPicture = function (files, imgType) {
+        angular.forEach(files, function (flowFile) {
+            var fileReader = new FileReader();
+            fileReader.onload = function (event) {
+                var uri = event.target.result;
+                $scope.ownProfileData[imgType] = uri;
+            };
+            fileReader.readAsDataURL(flowFile.file);
+        });
+    };
 
     // fixme: do not call loadProfileData function here
     $scope.loadProfileData();
