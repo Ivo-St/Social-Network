@@ -1,16 +1,19 @@
-<div class="login">
-    <form ng-submit="login()">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" required placeholder="Username" ng-model="loginData.username" />
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" required placeholder="Password" ng-model="loginData.password" />
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-lg btn-danger" />
-            <a href="#/register">Register</a>
-        </div>
-    </form>
+<div class="loginWrapper">
+    <h2>Sign in to contionue to The Social Network</h2>
+    <div class="login">
+        <form ng-submit="login()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" required placeholder="Username" ng-model="loginData.username" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required placeholder="Password" ng-model="loginData.password" />
+            </div>
+            <div class="form-group">
+                <input type="submit" id="loginBtn" class="btn btn-lg btn-primary" value="Login" />
+                <a href="#/register">Register</a>
+            </div>
+        </form>
+    </div>
 </div>
