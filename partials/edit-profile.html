@@ -4,10 +4,12 @@
     </div>
     <form ng-submit="editProfile()">
         <div id="profileImage">
+            <h4 class="imageCaption">Profile image</h4>
             <img ng-src="{{ownProfileData.profileImageData}}" />
             <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
         </div>
         <div id="coverImage">
+            <h4 class="imageCaption">Cover image</h4>
             <img ng-src="{{ownProfileData.coverImageData}}" />
             <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
         </div>
