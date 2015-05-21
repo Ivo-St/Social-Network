@@ -142,3 +142,7 @@ input[type="button"] {
     max-width: 300px;
     padding: 1%;
 }
+
+.imageCaption {
+    font-family: 'Indie Flower', cursive;
+}
