@@ -1,4 +1,4 @@
-/* global socialNetwork, sessionStorage */
+/* global socialNetwork, sessionStorage, FileReader */
 
 socialNetwork.controller('userController', function ($scope, $document, userAuthentication, notifyService) {
 
