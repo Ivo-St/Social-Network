@@ -71,12 +71,10 @@ input[type="button"] {
     font-family: 'Indie Flower', cursive;
 }
 
-.friendsWrapper {
+.pageInfo {
     margin-top: 2%;
-}
-
-#userInfo {
     background-color: #F4F4F4;
+    font-family: 'Indie Flower', cursive;
     margin-bottom: 1%;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
@@ -85,13 +83,13 @@ input[type="button"] {
     box-shadow: 0px 3px 8px 1px rgba(50, 50, 50, 0.78);
 }
 
-#userInfo #filter {
+.pageInfo #filter {
     display: inline-block;
     float: right;
     margin: 3%;
 }
 
-#userInfo h3 {
+.pageInfo h3 {
     margin: 2%;
     font-size: 30px;
     display: inline-block;
@@ -122,7 +120,25 @@ input[type="button"] {
 }
 
 #friend p {
-    font-size: 20px;
+    display: block;
+    font-size: 18px;
     margin-top: 5%;
     margin-bottom: 0;
+}
+
+.editProfileWrapper #profileImage {
+    display: inline-block;
+    margin-right: 2%;
+}
+
+.editProfileWrapper #coverImage {
+    display: inline-block;
+}
+
+.editProfileWrapper #profileImage img,
+.editProfileWrapper #coverImage img {
+    border: 1px dashed black;
+    max-height: 300px;
+    max-width: 300px;
+    padding: 1%;
 }
