@@ -1,6 +1,6 @@
 /* exported socialNetwork */
 
-var socialNetwork = angular.module('SocialNetwork', ['ngRoute']);
+var socialNetwork = angular.module('SocialNetwork', ['ngRoute', 'flow']);
 
 socialNetwork.constant('BASE_URL', 'http://softuni-social-network.azurewebsites.net/api/');
 
