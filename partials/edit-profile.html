@@ -1,14 +1,25 @@
-<div ng-init="loadProfileData()">
+<div class="editProfileWrapper" ng-init="loadProfileData()">
+    <div class="pageInfo">
+        <h3>Edit Profile</h3>
+    </div>
     <form ng-submit="editProfile()">
-        <div>
+        <div id="profileImage">
+            <img ng-src="{{ownProfileData.profileImageData}}" />
+            <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
+        </div>
+        <div id="coverImage">
+            <img ng-src="{{ownProfileData.coverImageData}}" />
+            <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
+        </div>
+        <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" required placeholder="Name" ng-model="ownProfileData.name" />
+            <input type="text" id="name" class="form-control" required placeholder="Name" ng-model="ownProfileData.name" />
         </div>
-        <div>
+        <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" required placeholder="myemail@example.com" ng-model="ownProfileData.email" />
+            <input type="email" id="email" class="form-control" required placeholder="myemail@example.com" ng-model="ownProfileData.email" />
         </div>
-        <div>
+        <div class="form-group">
             <label for="0">Other</label>
             <input type="radio" name="gender" id="0" value="0" ng-model="ownProfileData.gender" />
             <label for="1">Male</label>
@@ -16,14 +27,6 @@
             <label for="2">Female</label>
             <input type="radio" name="gender" id="2" value="2" ng-model="ownProfileData.gender" />
         </div>
-        <div>
-            <img ng-src="{{ownProfileData.profileImageData}}" />
-            <input type="file" accept=".jpg" ng-model="ownProfileData.profileImageData" />
-        </div>
-        <div>
-            <img ng-src="{{ownProfileData.coverImageData}}" />
-            <input type="file" accept=".jpg" ng-model="ownProfileData.coverImageData" />
-        </div>
-        <input type="submit" />
+        <input type="submit" class="btn btn-lg btn-danger" value="Edit profile" />
     </form>
 </div>
