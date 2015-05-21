@@ -10,7 +10,6 @@ socialNetwork.controller('mainController', function ($scope, userAuthentication)
 
                 // changes move this ($scope.ownProfileData)?
                 $scope.ownProfileData = data;
-                console.log(data);
             }, function (data) {
                 console.log(data);
             });
