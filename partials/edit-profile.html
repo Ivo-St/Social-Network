@@ -6,12 +6,12 @@
         <div id="images">
             <div id="profileImage" flow-init flow-name="uploader.flow" flow-files-added="uploadPicture($files,'profileImageData')">
                 <h4 class="imageCaption">Profile image</h4>
-                <img ng-src="{{ownProfileData.profileImageData || '/sources/default.jpg'}}" flow-img="$flow.files[0]" />
+                <img ng-src="{{ownProfileData.profileImageData || '/sources/default.jpg'}}" flow-img="$flow.files[$flow.files.length-1]" />
                 <input type="file" accept=".jpg" flow-btn />
             </div>
             <div id="coverImage" flow-init flow-name="uploader.flow" flow-files-added="uploadPicture($files,'coverImageData')">
                 <h4 class="imageCaption">Cover image</h4>
-                <img ng-src="{{ownProfileData.coverImageData || '/sources/default-cover.jpg'}}" flow-img="$flow.files[0]" />
+                <img ng-src="{{ownProfileData.coverImageData || '/sources/default-cover.jpg'}}" flow-img="$flow.files[$flow.files.length-1]" />
                 <input type="file" accept=".jpg" flow-btn />
             </div>
         </div>
