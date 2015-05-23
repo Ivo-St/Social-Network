@@ -95,7 +95,12 @@ input[type="button"] {
 .pageInfo #filter {
     display: inline-block;
     float: right;
-    margin: 3%;
+    margin: 2%;
+}
+
+.pageInfo #filter input[type="text"] {
+    display: inline-block;
+    width: inherit;
 }
 
 .pageInfo h3 {
