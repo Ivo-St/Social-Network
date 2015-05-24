@@ -1,0 +1,14 @@
+<div>
+    <div ng-repeat="post in newsFeed track by post.id">
+        <p>
+            <img ng-src="{{post.author.profileImageData}}" />
+            <span>{{post.author.name}}</span> posted on
+            <img ng-src="{{post.wallOwner.profileImageData}}" />
+            <span>{{post.wallOwner.name}}</span>'s wall
+        </p>
+        <p>{{post.postContent}}</p>
+        <p>on
+            <time>{{post.date}}</time>
+        </p>
+    </div>
+</div>
