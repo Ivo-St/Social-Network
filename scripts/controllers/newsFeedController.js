@@ -81,5 +81,14 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     };
 
+    $scope.postComment = function (postId, commentContent) {
+        newsFeedService.postComment(postId, commentContent)
+            .then(function (data) {
+                notifyService.success("Successfully posted comment");
+            }, function (data) {
+                notifyService.error(data.message);
+            });
+    };
+
     getNewsFeed();
 });
