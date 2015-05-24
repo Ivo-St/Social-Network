@@ -6,9 +6,21 @@
             <img ng-src="{{post.wallOwner.profileImageData}}" />
             <span>{{post.wallOwner.name}}</span>'s wall
         </p>
-        <p>{{post.postContent}}</p>
-        <p>on
-            <time>{{post.date}}</time>
+        <p>
+            {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
         </p>
+        <div>
+            <p>{{post.postContent}}</p>
+            <a ng-show="post.liked">Unlike</a>
+            <a ng-hide="post.liked">Like</a>
+        </div>
+        <div>
+            <p ng-show="post.liked">
+                You <span ng-if="(post.likesCount-1)>0">and {{post.likesCount-1}} other people</span> like this.
+            </p>
+            <p ng-hide="post.liked">
+                {{post.likesCount}} people like this.
+            </p>
+        </div>
     </div>
 </div>
