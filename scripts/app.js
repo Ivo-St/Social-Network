@@ -31,6 +31,10 @@ socialNetwork.config(function ($routeProvider) {
             templateUrl: 'partials/friends.html',
             controller: 'userController',
         })
+        .when('/user/home', {
+            templateUrl: 'partials/news-feed.html',
+            controller: 'newsFeedController',
+        })
         .otherwise({
             redirectTo: '/'
         });
