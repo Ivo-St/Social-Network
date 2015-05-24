@@ -5,9 +5,8 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
         newsFeedService.getNewsFeed()
             .then(function (data) {
                 $scope.newsFeed = data;
-                console.log($scope.newsFeed);
             }, function (data) {
-                notifyService.error(data);
+                notifyService.error(data.message);
             });
     }
 
