@@ -24,4 +24,6 @@ socialNetwork.factory('newsFeedService', function ($http, $q, BASE_URL) {
 
         return deferred.promise;
     };
+
+    return feedService;
 });
