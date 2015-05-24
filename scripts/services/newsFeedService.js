@@ -113,5 +113,30 @@ socialNetwork.factory('newsFeedService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    feedService.postComment = function (postId, commentContent) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'POST',
+            url: BASE_URL + 'posts/' + postId + '/comments',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            },
+            data: {
+                commentContent: commentContent
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     return feedService;
 });
