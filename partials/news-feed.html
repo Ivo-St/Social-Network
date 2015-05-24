@@ -2,25 +2,40 @@
     <div ng-repeat="post in newsFeed track by post.id">
         <p>
             <img ng-src="{{post.author.profileImageData}}" />
-            <span>{{post.author.name}}</span> posted on
+            <span ng-bind="post.author.name"></span> posted on
             <img ng-src="{{post.wallOwner.profileImageData}}" />
-            <span>{{post.wallOwner.name}}</span>'s wall
+            <span ng-bind="post.wallOwner.name"></span>'s wall
         </p>
         <p>
             {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
         </p>
         <div>
-            <p>{{post.postContent}}</p>
-            <a ng-show="post.liked">Unlike</a>
-            <a ng-hide="post.liked">Like</a>
+            <p ng-bind="post.postContent"></p>
+            <a ng-show="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
+            <a ng-hide="post.liked" ng-click="likePost(post.id)">Like</a>
         </div>
         <div>
             <p ng-show="post.liked">
-                You <span ng-if="(post.likesCount-1)>0">and {{post.likesCount-1}} other people</span> like this.
+                You <span ng-if="(post.likesCount-1)>0">and <span ng-bind="post.likesCount-1"></span> other people</span> like this.
             </p>
             <p ng-hide="post.liked">
-                {{post.likesCount}} people like this.
+                <span ng-bind="post.likesCount"></span> people like this.
             </p>
+        </div>
+        <div ng-repeat="comment in post.comments track by comment.id">
+            <p>
+                <img ng-src="{{comment.author.profileImageData}}" />
+                <span ng-bind="comment.author.name"></span>
+            </p>
+            <p>
+                {{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
+            </p>
+            <div>
+                <p ng-bind="comment.commentContent"></p>
+                <span ng-bind="comment.likesCount"></span>
+                <a ng-show="comment.liked" ng-click="unlikeComment(post.id,comment.id)">Unlike</a>
+                <a ng-hide="comment.liked" ng-click="likeComment(post.id,comment.id)">Like</a>
+            </div>
         </div>
     </div>
 </div>
