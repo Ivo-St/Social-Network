@@ -2,9 +2,9 @@
     <div ng-repeat="post in newsFeed track by post.id">
         <p>
             <img ng-src="{{post.author.profileImageData}}" />
-            <span ng-bind="post.author.name"></span> posted on
+            <a ng-href="post.author.username" ng-bind="post.author.name"></a> posted on
             <img ng-src="{{post.wallOwner.profileImageData}}" />
-            <span ng-bind="post.wallOwner.name"></span>'s wall
+            <a ng-href="post.wallOwner.username" ng-bind="post.wallOwner.name"></a>'s wall
         </p>
         <p>
             {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
@@ -23,7 +23,7 @@
             </p>
         </div>
         <div>
-            <form ng-submit="postComment($index,post.id,commentContent[post.id])">
+            <form ng-submit="postComment(post.id,commentContent[post.id])">
                 <label for="comment{{post.id}}">Add comment</label>
                 <input type="text" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
                 <input type="submit" value="Post comment" />
@@ -43,6 +43,9 @@
                 <a ng-show="comment.liked" ng-click="unlikeComment(post.id,comment.id)">Unlike</a>
                 <a ng-hide="comment.liked" ng-click="likeComment(post.id,comment.id)">Like</a>
             </div>
+        </div>
+        <div>
+            <button ng-click="loadAllComments(post.id)">Load all comments</button>
         </div>
     </div>
 </div>
