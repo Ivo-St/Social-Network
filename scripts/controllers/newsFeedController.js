@@ -10,17 +10,33 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     }
 
+    function getPostIndex(postId) {
+        for (var index in $scope.newsFeed) {
+            if ($scope.newsFeed[index].id == postId) {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
+    function getCommentIndex(postIndex, commentId) {
+        for (var index in $scope.newsFeed) {
+            if ($scope.newsFeed[postIndex].comments[index].id == commentId) {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
     // future: merge likePost and unlikePost functions
     $scope.likePost = function (postId) {
         newsFeedService.likePost(postId)
             .then(function (data) {
-                for (var element in $scope.newsFeed) {
-                    if ($scope.newsFeed[element].id == postId) {
-                        $scope.newsFeed[element].liked = true;
-                        $scope.newsFeed[element].likesCount = data.likesCount;
-                        break;
-                    }
-                }
+                var postIndex = getPostIndex(postId);
+                $scope.newsFeed[postIndex].liked = true;
+                $scope.newsFeed[postIndex].likesCount = data.likesCount;
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -29,13 +45,9 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.unlikePost = function (postId) {
         newsFeedService.unlikePost(postId)
             .then(function (data) {
-                for (var element in $scope.newsFeed) {
-                    if ($scope.newsFeed[element].id == postId) {
-                        $scope.newsFeed[element].liked = false;
-                        $scope.newsFeed[element].likesCount = data.likesCount;
-                        break;
-                    }
-                }
+                var postIndex = getPostIndex(postId);
+                $scope.newsFeed[postIndex].liked = false;
+                $scope.newsFeed[postIndex].likesCount = data.likesCount;
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -44,18 +56,11 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.likeComment = function (postId, commentId) {
         newsFeedService.likeComment(postId, commentId)
             .then(function (data) {
-                for (var element in $scope.newsFeed) {
-                    if ($scope.newsFeed[element].id == postId) {
-                        for (var index in $scope.newsFeed[element].comments) {
-                            if ($scope.newsFeed[element].comments[index].id == commentId) {
-                                $scope.newsFeed[element].comments[index].liked = true;
-                                $scope.newsFeed[element].comments[index].likesCount = data.likesCount;
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
+                var postIndex = getPostIndex(postId);
+                var commentIndex = getCommentIndex(postIndex, commentId);
+                $scope.newsFeed[postIndex].comments[commentIndex].liked = true;
+                $scope.newsFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
+
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -64,30 +69,33 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.unlikeComment = function (postId, commentId) {
         newsFeedService.unlikeComment(postId, commentId)
             .then(function (data) {
-                for (var element in $scope.newsFeed) {
-                    if ($scope.newsFeed[element].id == postId) {
-                        for (var index in $scope.newsFeed[element].comments) {
-                            if ($scope.newsFeed[element].comments[index].id == commentId) {
-                                $scope.newsFeed[element].comments[index].liked = false;
-                                $scope.newsFeed[element].comments[index].likesCount = data.likesCount;
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
+                var postIndex = getPostIndex(postId);
+                var commentIndex = getCommentIndex(postIndex, commentId);
+                $scope.newsFeed[postIndex].comments[commentIndex].liked = false;
+                $scope.newsFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
             }, function (data) {
                 notifyService.error(data.message);
             });
     };
 
-    $scope.postComment = function (index, postId, commentContent) {
+    $scope.postComment = function (postId, commentContent) {
         newsFeedService.postComment(postId, commentContent)
             .then(function (data) {
-                $scope.newsFeed[index].comments.unshift(data);
+                var postIndex = getPostIndex(postId);
+                $scope.newsFeed[postIndex].comments.unshift(data);
                 notifyService.success("Successfully posted comment");
             }, function (data) {
                 notifyService.error(data.message);
+            });
+    };
+
+    $scope.loadAllComments = function (postId) {
+        newsFeedService.getPostComments(postId)
+            .then(function (data) {
+                var postIndex = getPostIndex(postId);
+                $scope.newsFeed[postIndex].comments = data;
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
             });
     };
 
