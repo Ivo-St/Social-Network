@@ -23,7 +23,7 @@
             </p>
         </div>
         <div>
-            <form ng-submit="postComment(post.id,commentContent[post.id])">
+            <form ng-submit="postComment($index,post.id,commentContent[post.id])">
                 <label for="comment{{post.id}}">Add comment</label>
                 <input type="text" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
                 <input type="submit" value="Post comment" />
