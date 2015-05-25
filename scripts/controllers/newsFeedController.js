@@ -81,9 +81,10 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     };
 
-    $scope.postComment = function (postId, commentContent) {
+    $scope.postComment = function (index, postId, commentContent) {
         newsFeedService.postComment(postId, commentContent)
             .then(function (data) {
+                $scope.newsFeed[index].comments.unshift(data);
                 notifyService.success("Successfully posted comment");
             }, function (data) {
                 notifyService.error(data.message);
