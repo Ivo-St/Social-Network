@@ -10,8 +10,18 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
             });
     }
 
+    function getUserWall(username) {
+        userService.getFriendWall(username)
+            .then(function (data) {
+                $scope.userWall = data;
+            }, function (data) {
+                notifyService.error(data.message);
+            });
+    }
+
     $scope.loadUserWallPage = function () {
         getUserFullData($routeParams.username);
+        getUserWall($routeParams.username);
     };
 
     $scope.loadUserWallPage();
