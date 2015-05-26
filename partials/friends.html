@@ -12,7 +12,7 @@
         <ul>
             <li id="friend" ng-repeat="friend in friends | filter : filter">
                 <img ng-src="{{friend.profileImageData || '/sources/default.jpg'}}" />
-                <p>{{friend.name}}</p>
+                <a href="#/users/{{friend.username}}"><span ng-bind="friend.name"></span></a>
             </li>
         </ul>
     </div>
