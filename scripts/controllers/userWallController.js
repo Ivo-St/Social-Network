@@ -125,5 +125,16 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
             });
     };
 
+    $scope.makePost = function () {
+        var username = $routeParams.username;
+        userWallService.makePost(username, $scope.newPost.text)
+            .then(function (data) {
+                $scope.wallFeed.push(data);
+                notifyService.success('Post added successfully');
+            }, function (data) {
+                notifyService.error(data.message);
+            });
+    };
+
     $scope.loadUserWallPage();
 });
