@@ -41,5 +41,31 @@ socialNetwork.factory('userWallService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    userWallService.makePost = function (username, postContent) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'POST',
+            url: BASE_URL + 'posts',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            },
+            data: {
+                username: username,
+                postContent: postContent
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     return userWallService;
 });
