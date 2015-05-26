@@ -12,7 +12,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
 
     function getPostIndex(postId) {
         for (var index in $scope.newsFeed) {
-            if ($scope.newsFeed[index].id == postId) {
+            if ($scope.newsFeed[index].id === postId) {
                 return index;
             }
         }
@@ -21,8 +21,8 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     }
 
     function getCommentIndex(postIndex, commentId) {
-        for (var index in $scope.newsFeed) {
-            if ($scope.newsFeed[postIndex].comments[index].id == commentId) {
+        for (var index in $scope.newsFeed[postIndex].comments) {
+            if ($scope.newsFeed[postIndex].comments[index].id === commentId) {
                 return index;
             }
         }
@@ -30,13 +30,23 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
         return -1;
     }
 
-    // future: merge likePost and unlikePost functions
+    function appreciatePost(data, postId) {
+        var postIndex = getPostIndex(postId);
+        $scope.newsFeed[postIndex].liked = data.liked;
+        $scope.newsFeed[postIndex].likesCount = data.likesCount;
+    }
+
+    function appreciateComment(data, postId, commentId) {
+        var postIndex = getPostIndex(postId);
+        var commentIndex = getCommentIndex(postIndex, commentId);
+        $scope.newsFeed[postIndex].comments[commentIndex].liked = data.liked;
+        $scope.newsFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
+    }
+
     $scope.likePost = function (postId) {
         newsFeedService.likePost(postId)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
-                $scope.newsFeed[postIndex].liked = true;
-                $scope.newsFeed[postIndex].likesCount = data.likesCount;
+                appreciatePost(data, postId);
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -45,9 +55,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.unlikePost = function (postId) {
         newsFeedService.unlikePost(postId)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
-                $scope.newsFeed[postIndex].liked = false;
-                $scope.newsFeed[postIndex].likesCount = data.likesCount;
+                appreciatePost(data, postId);
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -56,11 +64,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.likeComment = function (postId, commentId) {
         newsFeedService.likeComment(postId, commentId)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
-                var commentIndex = getCommentIndex(postIndex, commentId);
-                $scope.newsFeed[postIndex].comments[commentIndex].liked = true;
-                $scope.newsFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
-
+                appreciateComment(data, postId, commentId);
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -69,10 +73,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.unlikeComment = function (postId, commentId) {
         newsFeedService.unlikeComment(postId, commentId)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
-                var commentIndex = getCommentIndex(postIndex, commentId);
-                $scope.newsFeed[postIndex].comments[commentIndex].liked = false;
-                $scope.newsFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
+                appreciateComment(data, postId, commentId);
             }, function (data) {
                 notifyService.error(data.message);
             });
