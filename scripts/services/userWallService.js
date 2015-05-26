@@ -41,24 +41,5 @@ socialNetwork.factory('userWallService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
-    userWallService.getFriendFriendsPreview = function (username) {
-        var deferred = $q.defer();
-        var url = BASE_URL + 'users/' + username + '/friends/preview';
-        var headers = {
-            Authorization: 'Bearer ' + sessionStorage.accessToken
-        };
-
-        $http.get(url, {
-                headers: headers
-            })
-            .success(function (data) {
-                deferred.resolve(data);
-            }, function (data) {
-                deferred.reject(data);
-            });
-
-        return deferred.promise;
-    };
-
     return userWallService;
 });
