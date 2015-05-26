@@ -29,7 +29,7 @@ socialNetwork.config(function ($routeProvider) {
         })
         .when('/user/friends', {
             templateUrl: 'partials/friends.html',
-            controller: 'userController',
+            controller: 'friendsController',
         })
         .when('/user/home', {
             templateUrl: 'partials/news-feed.html',
@@ -38,6 +38,10 @@ socialNetwork.config(function ($routeProvider) {
         .when('/users/:username', {
             templateUrl: 'partials/user-wall.html',
             controller: 'userWallController',
+        })
+        .when('/users/:username/friends', {
+            templateUrl: 'partials/friends.html',
+            controller: 'friendsController',
         })
         .otherwise({
             redirectTo: '/'
