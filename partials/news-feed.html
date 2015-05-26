@@ -1,33 +1,28 @@
 <div>
     <div ng-repeat="post in newsFeed | orderBy: '+date' track by post.id">
-        <p>
-            <img ng-src="{{post.author.profileImageData}}" />
-            <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a> posted on
-            <img ng-src="{{post.wallOwner.profileImageData}}" />
-            <a href="#/users/{{post.wallOwner.username}}" ng-bind="post.wallOwner.name"></a>'s wall
-        </p>
-        <p>
-            {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
-        </p>
         <div>
-            <p ng-bind="post.postContent"></p>
-            <a ng-show="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
-            <a ng-hide="post.liked" ng-click="likePost(post.id)">Like</a>
-        </div>
-        <div>
-            <p ng-show="post.liked">
-                You <span ng-if="(post.likesCount-1)>0">and <span ng-bind="post.likesCount-1"></span> other people</span> like this.
+            <p>
+                <img ng-src="{{post.author.profileImageData}}" />
+                <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a> posted on
+                <img ng-src="{{post.wallOwner.profileImageData}}" />
+                <a href="#/users/{{post.wallOwner.username}}" ng-bind="post.wallOwner.name"></a>'s wall
             </p>
-            <p ng-hide="post.liked">
-                <span ng-bind="post.likesCount"></span> people like this.
+            <p>
+                {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
             </p>
-        </div>
-        <div>
-            <form ng-submit="postComment(post.id,commentContent[post.id])">
-                <label for="comment{{post.id}}">Add comment</label>
-                <input type="text" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
-                <input type="submit" value="Post comment" />
-            </form>
+            <div>
+                <p ng-bind="post.postContent"></p>
+                <a ng-show="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
+                <a ng-hide="post.liked" ng-click="likePost(post.id)">Like</a>
+            </div>
+            <div>
+                <p ng-show="post.liked">
+                    You <span ng-if="(post.likesCount-1)>0">and <span ng-bind="post.likesCount-1"></span> other people</span> like this.
+                </p>
+                <p ng-hide="post.liked">
+                    <span ng-bind="post.likesCount"></span> people like this.
+                </p>
+            </div>
         </div>
         <div ng-repeat="comment in post.comments | orderBy: '+date' track by comment.id">
             <p>
@@ -46,6 +41,13 @@
         </div>
         <div>
             <button ng-click="loadAllComments(post.id)">Load all comments</button>
+        </div>
+        <div>
+            <form ng-submit="postComment(post.id,commentContent[post.id])">
+                <label for="comment{{post.id}}">Add comment</label>
+                <input type="text" placeholder="Add comment" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
+                <input type="submit" value="Post comment" />
+            </form>
         </div>
     </div>
 </div>
