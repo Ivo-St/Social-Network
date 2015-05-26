@@ -11,12 +11,24 @@
         </div>
     </div>
     <div>
-        <div ng-repeat="post in userWall | orderBy: '+date' track by post.id">
+        <p>
+            Total friends count:
+            <a href="">
+                <span ng-bind="userFriendsPreview.totalCount"></span>
+            </a>
+        </p>
+        <div>
+            <div ng-repeat="friend in userFriendsPreview.friends">
+                <div>
+                    <img ng-src="{{friend.profileImageData}}" />
+                    <span ng-bind="friend.name"></span>
+                </div>
+            </div>
+        </div>
+        <div ng-repeat="post in wallFeed | orderBy: '+date' track by post.id">
             <p>
                 <img ng-src="{{post.author.profileImageData}}" />
-                <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a> posted on
-                <img ng-src="{{post.wallOwner.profileImageData}}" />
-                <a href="#/users/{{post.wallOwner.username}}" ng-bind="post.wallOwner.name"></a>'s wall
+                <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a> posted on your wall
             </p>
             <p>
                 {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
