@@ -11,17 +11,19 @@
         </div>
     </div>
     <div>
-        <p>
-            Total friends count:
-            <a href="">
-                <span ng-bind="userFriendsPreview.totalCount"></span>
-            </a>
-        </p>
         <div>
-            <div ng-repeat="friend in userFriendsPreview.friends">
-                <div>
-                    <img ng-src="{{friend.profileImageData}}" />
-                    <span ng-bind="friend.name"></span>
+            <p>
+                Total friends count:
+                <a href="#/users/{{userProfile.username}}/friends">
+                    <span ng-bind="userFriendsPreview.totalCount"></span>
+                </a>
+            </p>
+            <div>
+                <div ng-repeat="friend in userFriendsPreview.friends">
+                    <div>
+                        <img ng-src="{{friend.profileImageData}}" />
+                        <span ng-bind="friend.name"></span>
+                    </div>
                 </div>
             </div>
         </div>
