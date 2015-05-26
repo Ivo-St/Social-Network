@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.controller('userWallController', function ($scope, $routeParams, userWallService, newsFeedService, notifyService) {
+socialNetwork.controller('userWallController', function ($scope, $routeParams, userWallService, newsFeedService, friendsService, notifyService) {
     function getUserFullData(username) {
         userWallService.getUserFullData(username)
             .then(function (data) {
@@ -20,7 +20,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
     }
 
     function getUserFriendsPreview(username) {
-        userWallService.getFriendFriendsPreview(username)
+        friendsService.getFriendFriendsPreview(username)
             .then(function (data) {
                 $scope.userFriendsPreview = data;
             }, function (data) {
