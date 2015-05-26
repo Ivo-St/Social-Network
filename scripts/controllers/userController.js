@@ -1,6 +1,6 @@
 /* global socialNetwork, sessionStorage, FileReader */
 
-socialNetwork.controller('userController', function ($scope, $document, userAuthentication, notifyService) {
+socialNetwork.controller('userController', function ($scope, $document, userAuthentication, friendsService, notifyService) {
 
     // fixme: implement html encoding and fix the pictures preview and submit
     $scope.editProfile = function () {
@@ -26,23 +26,6 @@ socialNetwork.controller('userController', function ($scope, $document, userAuth
                 notifyService.error(data.message);
                 console.log(data);
             });
-    };
-
-    $scope.getUserFriends = function () {
-        userAuthentication.getFriends()
-            .then(function (data) {
-                $scope.friends = data;
-                $scope.friends.numbetOfFriends = data.length;
-            }, function (data) {
-                console.log(data);
-            });
-    };
-
-    $scope.prepareDataForFriendsPage = function () {
-
-        // fixme: find another way to implement this
-        $scope.fullName = JSON.parse(sessionStorage.ownProfileData).name;
-        $scope.getUserFriends();
     };
 
     // fixme: find a better way to load the profile data
