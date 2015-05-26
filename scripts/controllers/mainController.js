@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.controller('mainController', function ($scope, userAuthentication) {
+socialNetwork.controller('mainController', function ($scope, userAuthentication, notifyService) {
 
     // fixme: is this a good place for the function getOwnProfileData
     $scope.getOwnProfileData = function () {
@@ -11,6 +11,7 @@ socialNetwork.controller('mainController', function ($scope, userAuthentication)
                 // changes move this ($scope.ownProfileData)?
                 $scope.ownProfileData = data;
             }, function (data) {
+                notifyService.error(data.message);
                 console.log(data);
             });
     };
