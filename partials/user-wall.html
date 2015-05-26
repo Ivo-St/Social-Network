@@ -55,13 +55,6 @@
                     <span ng-bind="post.likesCount"></span> people like this.
                 </p>
             </div>
-            <div>
-                <form ng-submit="postComment(post.id,commentContent[post.id])">
-                    <label for="comment{{post.id}}">Add comment</label>
-                    <input type="text" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
-                    <input type="submit" value="Post comment" />
-                </form>
-            </div>
             <div ng-repeat="comment in post.comments | orderBy: '+date' track by comment.id">
                 <p>
                     <img ng-src="{{comment.author.profileImageData}}" />
@@ -79,6 +72,13 @@
             </div>
             <div>
                 <button ng-click="loadAllComments(post.id)">Load all comments</button>
+            </div>
+            <div>
+                <form ng-submit="postComment(post.id,commentContent[post.id])">
+                    <label for="comment{{post.id}}">Add comment</label>
+                    <input type="text" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
+                    <input type="submit" value="Post comment" />
+                </form>
             </div>
         </div>
     </div>
