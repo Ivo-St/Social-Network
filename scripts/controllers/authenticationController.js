@@ -36,9 +36,9 @@ socialNetwork.controller('authenticationController', function ($scope, $location
         userAuthentication.logout()
             .then(function (data) {
                 notifyService.success(data.message);
-                $location.path('/');
                 userAuthentication.clearCredentials();
                 userAuthentication.clearUserData();
+                $location.path('/');
             }, function (data) {
                 notifyService.error(data.message);
             });
