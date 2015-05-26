@@ -1,7 +1,7 @@
 <div class="friendsWrapper" ng-init="prepareDataForFriendsPage()">
     <div class="pageInfo">
         <h3>
-            <span>{{fullName}}</span> - Friends (<a href="#/user/friends">{{friends.numbetOfFriends}}</a> in total)
+            <span>{{fullName}}</span> - Friends (<span ng-bind="friends.numbetOfFriends"></span> in total)
         </h3>
         <div id="filter">
             <label for="filterByName">Name filter:</label>
