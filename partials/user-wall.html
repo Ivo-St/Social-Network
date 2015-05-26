@@ -12,7 +12,7 @@
     </div>
     <div>
         <div>
-            <p>
+            <p ng-if="userFriendsPreview.totalCount>0">
                 Total friends count:
                 <a href="#/users/{{userProfile.username}}/friends">
                     <span ng-bind="userFriendsPreview.totalCount"></span>
@@ -27,10 +27,17 @@
                 </div>
             </div>
         </div>
+        <div>
+            <form ng-submit="makePost()">
+                <input type="text" placeholder="Message..." ng-model="newPost.text" />
+                <input type="submit" value="Post" />
+            </form>
+        </div>
         <div ng-repeat="post in wallFeed | orderBy: '+date' track by post.id">
             <p>
+                <span>Post by </span>
                 <img ng-src="{{post.author.profileImageData}}" />
-                <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a> posted on your wall
+                <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a>
             </p>
             <p>
                 {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
