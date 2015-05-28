@@ -27,14 +27,14 @@ socialNetwork.controller('headerController', function ($scope, friendsService, n
             .then(function (data) {
                 notifyService.success('Friend request approved successfully.');
                 var index = getFriendRequestIndexById(id);
-                $scope.friendsRequests[index].splice(index, 1);
+                $scope.friendsRequests.splice(index, 1);
             }, function (data) {
                 notifyService.error('An error occured. ' + data.message);
             });
     };
 
     $scope.declineFriendRequest = function (id) {
-        friendsService.acceptFriendRequest(id)
+        friendsService.declineFriendRequest(id)
             .then(function (data) {
                 notifyService.success('Friend request declined successfully.');
                 var index = getFriendRequestIndexById(id);
