@@ -33,11 +33,18 @@
                 <input type="submit" value="Post" />
             </form>
         </div>
-        <div ng-repeat="post in wallFeed | orderBy: '+date' track by post.id">
+        <div ng-repeat="post in wallFeed | orderBy: '-date' track by post.id">
             <p>
                 <span>Post by </span>
                 <img ng-src="{{post.author.profileImageData}}" />
-                <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a>
+                <a ng-click="showDetails[post.id][post.author.id] = !showDetails[post.id][post.author.id]" ng-bind="post.author.name"></a>
+                <div ng-show="showDetails[post.id][post.author.id]">
+                    <img ng-src="{{post.author.profileImageData}}" />
+                    <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a>
+                    <button ng-show="!post.author.isFriend && !post.author.hasPendingRequest && post.author.username != ownProfileData.username" ng-click="sendFriendRequest(post.author.username)">Send Friend Request</button>
+                    <span ng-show="post.author.hasPendingRequest">You have send already a friend invitation</span>
+                    <span ng-show="post.author.isFriend">friend</span>
+                </div>
             </p>
             <p>
                 {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
