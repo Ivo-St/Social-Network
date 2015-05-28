@@ -1,0 +1,23 @@
+<div ng-controller="headerController">
+    <div>
+        <img ng-src="{{ownProfileData.profileImageData}}" />
+        <span ng-bind="ownProfileData.name"></span>
+    </div>
+    <div>
+        <a href="#/user/home"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></a>
+        <a href="#/user/editProfile"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+        <a href="#/user/changePassword"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span></a>
+        <a ng-click="showDetails = !showDetails"><span class="glyphicon glyphicon-user"><span ng-show="friendsRequests.length>0" class="badge" ng-bind="friendsRequests.length"></span></span></a>
+        <div ng-show="showDetails">
+            <div ng-hide="friendsRequests.length>0">
+                <span>Sorry. No new friends requests.</span>
+            </div>
+            <div ng-show="friendsRequests.length>0" ng-repeat="friendRequest in friendsRequests">
+                <img ng-src="{{friendRequest.user.profileImageData || '/sources/default.jpg'}}">
+                <span ng-bind="friendRequest.user.name"></span>
+                <button ng-click="acceptFriendRequest(friendRequest.id)">Accept friend request</button>
+                <button ng-click="declineFriendRequest(friendRequest.id)">Decline friend request</button>
+            </div>
+        </div>
+    </div>
+</div>
