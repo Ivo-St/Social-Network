@@ -63,5 +63,71 @@ socialNetwork.factory('friendsService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    friendsService.getFriendsRequests = function () {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'GET',
+            url: BASE_URL + 'me/requests',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
+    friendsService.acceptFriendRequest = function (id) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'PUT',
+            url: BASE_URL + 'me/requests/' + id + '?status=approved',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
+    friendsService.acceptFriendRequest = function (id) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'PUT',
+            url: BASE_URL + 'me/requests/' + id + '?status=rejected',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     return friendsService;
 });
