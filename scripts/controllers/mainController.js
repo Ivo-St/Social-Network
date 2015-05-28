@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.controller('mainController', function ($scope, userAuthentication, notifyService) {
+socialNetwork.controller('mainController', function ($scope, userAuthentication, friendsService, notifyService) {
 
     // fixme: is this a good place for the function getOwnProfileData
     $scope.getOwnProfileData = function () {
@@ -13,6 +13,15 @@ socialNetwork.controller('mainController', function ($scope, userAuthentication,
             }, function (data) {
                 notifyService.error(data.message);
                 console.log(data);
+            });
+    };
+
+    $scope.sendFriendRequest = function (username) {
+        friendsService.sendFriendRequest(username)
+            .then(function (data) {
+                notifyService.success(data.message);
+            }, function (data) {
+                notifyService.error(data.message);
             });
     };
 });
