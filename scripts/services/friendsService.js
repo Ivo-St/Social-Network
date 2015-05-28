@@ -107,12 +107,34 @@ socialNetwork.factory('friendsService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
-    friendsService.acceptFriendRequest = function (id) {
+    friendsService.declineFriendRequest = function (id) {
         var deferred = $q.defer();
 
         var request = {
             method: 'PUT',
             url: BASE_URL + 'me/requests/' + id + '?status=rejected',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
+    friendsService.sendFriendRequest = function (username) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'POST',
+            url: BASE_URL + 'me/requests/' + username,
             headers: {
                 Authorization: 'Bearer ' + sessionStorage.accessToken
             }
