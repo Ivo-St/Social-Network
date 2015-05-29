@@ -6,6 +6,58 @@ body {
     background-color: #CCCCCC;
 }
 
+.headerWrapper {
+    height: 50px;
+}
+
+.innerHeaderWrapper {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    padding: 4px;
+    border-bottom: 1px solid #a6a6a6;
+}
+
+#userProfile {
+    display: inline-block;
+}
+
+#navigation {
+    display: inline-block;
+    margin-left: 1%;
+}
+
+#profilePic {
+    width: 50px;
+    border-radius: 100%;
+}
+
+.friendRequests {
+    margin-bottom: 1%;
+}
+
+.popup {
+    position: absolute;
+    border: 1px solid grey;
+    padding: 1%;
+    border-radius: 10px;
+    background-color: white;
+    -webkit-box-shadow: 10px 10px 14px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 14px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 14px -8px rgba(0, 0, 0, 0.75);
+}
+
+#right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 18px
+}
+
+#friendRequestPic {
+    width: 50px;
+}
+
 .wellcome {
     margin-top: 5%;
     text-align: center;
@@ -203,4 +255,56 @@ input[type="button"] {
 
 .editProfileWrapper input[type="submit"] {
     margin-left: 4%;
+}
+
+#contentWrapper {
+    margin-top: 2%;
+}
+
+.postWrapper {
+    margin-bottom: 1%;
+    text-align: center;
+}
+
+.post {
+    margin: 0 auto;
+    padding: 1%;
+    width: 40%;
+    text-align: initial;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 2px;
+}
+
+.makeComment {
+    display: inline-block;
+}
+
+.comment {
+    display: inline-block;
+    width: 55%;
+}
+
+.postHeader {
+    border-bottom: 1px solid rgb(219, 219, 219);
+    margin-bottom: 2%;
+}
+
+.imgSmall {
+    width: 50px;
+    border-radius: 100%;
+}
+
+.date {
+    font-size: small;
+}
+
+.appreciatePost {
+    display: inline-block;
+    margin-left: 1%;
+}
+
+.commentsWrapper {
+    background-color: #f6f7f8;
+    margin-top: -1px;
 }
