@@ -47,3 +47,17 @@ socialNetwork.config(function ($routeProvider) {
             redirectTo: '/'
         });
 });
+
+socialNetwork.run(function ($rootScope, $location, userAuthentication) {
+    $rootScope.$on('$locationChangeStart', function (event) {
+        if ($location.path().indexOf("/user/") != -1 && !userAuthentication.isLoggedIn()) {
+            // Authorization check: anonymous site visitors cannot access user routes
+            $location.path("/");
+        }
+
+        if ($location.path().indexOf("/users/") != -1 && !userAuthentication.isLoggedIn()) {
+            // Authorization check: anonymous site visitors cannot access user routes
+            $location.path("/");
+        }
+    });
+});

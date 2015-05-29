@@ -7,7 +7,9 @@ socialNetwork.controller('mainController', function ($scope, $location, userAuth
         userAuthentication.getOwnProfileData()
             .then(function (data) {
                 userAuthentication.saveUserData(data);
-
+                if (!$scope.isLoggedIn) {
+                    $scope.isLoggedIn = true;
+                }
                 // changes move this ($scope.ownProfileData)?
                 $scope.ownProfileData = data;
             }, function (data) {
@@ -31,9 +33,12 @@ socialNetwork.controller('mainController', function ($scope, $location, userAuth
                 notifyService.success(data.message);
                 userAuthentication.clearCredentials();
                 userAuthentication.clearUserData();
+                $scope.isLoggedIn = false;
                 $location.path('/');
             }, function (data) {
                 notifyService.error(data.message);
             });
     };
+
+    $scope.isLoggedIn = userAuthentication.isLoggedIn();
 });
