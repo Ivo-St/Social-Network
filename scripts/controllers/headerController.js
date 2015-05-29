@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.controller('headerController', function ($scope, friendsService, notifyService) {
+socialNetwork.controller('headerController', function ($scope, userAuthentication, friendsService, searchService, notifyService) {
     function getFriendRequestIndexById(id) {
         var index = -1;
         for (var i in $scope.friendsRequests) {
@@ -44,6 +44,22 @@ socialNetwork.controller('headerController', function ($scope, friendsService, n
             });
     };
 
-    $scope.getOwnProfileData();
-    $scope.getFriendRequests();
+    $scope.searchUsers = function () {
+        if ($scope.searchTerm !== '') {
+            searchService.searchByName($scope.searchTerm)
+                .then(function (data) {
+                    console.log(data);
+                    $scope.searchResult = data;
+                }, function (data) {
+                    notifyService.error(data.message);
+                });
+        } else {
+            $scope.searchResult = [];
+        }
+    };
+
+    if (userAuthentication.isLoggedIn()) {
+        $scope.getOwnProfileData();
+        $scope.getFriendRequests();
+    }
 });
