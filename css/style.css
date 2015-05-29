@@ -18,6 +18,11 @@ body {
     border-bottom: 1px solid #a6a6a6;
 }
 
+.username {
+    font-family: 'Indie Flower', cursive;
+    font-weight: 600;
+}
+
 #userProfile {
     display: inline-block;
 }
@@ -56,6 +61,31 @@ body {
 
 #friendRequestPic {
     width: 50px;
+}
+
+#searchWrapper {
+    float: right;
+    margin-top: 8px;
+    margin-right: 1%;
+    width: 15%;
+    min-width: 100px;
+}
+
+.searchUser {
+    margin-bottom: 5px;
+}
+
+#searchWrapper .popup {
+    text-align: center;
+}
+
+#searchUser {
+    overflow: hidden;
+    max-width: 170px;
+}
+
+#searchResultsWrapper {
+    margin-top: 2px;
 }
 
 .wellcome {
@@ -176,6 +206,11 @@ input[type="button"] {
     border-radius: 2px;
 }
 
+.friendName {
+    overflow: hidden;
+    max-width: 105px;
+}
+
 #friend:hover {
     background-color: ghostwhite;
 }
@@ -285,6 +320,10 @@ input[type="button"] {
     width: 55%;
 }
 
+.allCommentsBtnWrapper {
+    margin-bottom: 1%;
+}
+
 .postHeader {
     border-bottom: 1px solid rgb(219, 219, 219);
     margin-bottom: 2%;
@@ -307,4 +346,75 @@ input[type="button"] {
 .commentsWrapper {
     background-color: #f6f7f8;
     margin-top: -1px;
+}
+
+#coverImg {
+    overflow: hidden;
+    width: 100%;
+    max-height: 350px;
+}
+
+#profileImgWrapper {
+    margin-top: -20%;
+    margin-left: 3%;
+}
+
+#profileImg {
+    border-radius: 100%;
+    width: 25%;
+}
+
+#fullNameWrapper {
+    display: inline-block;
+    margin-left: 5%;
+    font-family: cursive;
+    font-size: 5vw;
+    color: white;
+}
+
+#userFriendsPreview {
+    float: right;
+    background-color: #e9eaed;
+    padding: 1%;
+    width: 15%;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 2px;
+}
+
+#friendPreview {
+    margin-bottom: 5%;
+    overflow: hidden;
+}
+
+.morePostsWrapper {
+    text-align: center;
+}
+
+.pager {
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid rgb(174, 174, 174);
+    padding: 7px;
+    font-family: cursive;
+    font-weight: bold;
+}
+
+.noPosts {
+    font-family: cursive;
+    font-weight: bold;
+}
+
+#makePostWrapper {
+    float: left;
+    width: 22%;
+}
+
+.postComment {
+    margin-bottom: 2%;
+}
+
+.commentContent {
+    margin-left: 12%;
+    word-wrap: break-word;
+    overflow: hidden;
 }
