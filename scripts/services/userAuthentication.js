@@ -150,5 +150,9 @@ socialNetwork.factory('userAuthentication', function ($http, $q, BASE_URL) {
         sessionStorage.removeItem('ownProfileData');
     };
 
+    userService.isLoggedIn = function () {
+        return sessionStorage.accessToken !== undefined;
+    };
+
     return userService;
 });

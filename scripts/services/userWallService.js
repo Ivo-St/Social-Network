@@ -22,9 +22,12 @@ socialNetwork.factory('userWallService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
-    userWallService.getFriendWall = function (username) {
+    userWallService.getFriendWall = function (username, StartPostId) {
         var deferred = $q.defer();
         var url = BASE_URL + 'users/' + username + '/wall?StartPostId&PageSize=5';
+        if (StartPostId) {
+            url = BASE_URL + 'users/' + username + '/wall?StartPostId=' + StartPostId + '&PageSize=5';
+        }
         var headers = {
             Authorization: 'Bearer ' + sessionStorage.accessToken
         };

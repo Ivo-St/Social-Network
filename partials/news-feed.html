@@ -7,19 +7,19 @@
             <div class="post">
                 <div class="postHeader">
                     <img class="imgSmall" ng-src="{{post.author.profileImageData || '/sources/default.jpg'}}" />
-                    <a ng-click="showDetails[post.id][post.author.id] = !showDetails[post.id][post.author.id]" ng-bind="post.author.name"></a> posted on
+                    <a class="username" ng-click="showDetails[post.id][post.author.id] = !showDetails[post.id][post.author.id]" ng-bind="post.author.name"></a> posted on
                     <div class="popup" ng-show="showDetails[post.id][post.author.id]">
                         <img class="imgSmall" ng-src="{{post.author.profileImageData || '/sources/default.jpg'}}" />
-                        <a href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a>
+                        <a class="username" href="#/users/{{post.author.username}}" ng-bind="post.author.name"></a>
                         <button ng-show="!post.author.isFriend && !post.author.hasPendingRequest && post.author.username != ownProfileData.username" ng-click="sendFriendRequest(post.author.username)" class="btn btn-info">Send Friend Request</button>
                         <span ng-show="post.author.hasPendingRequest">You have send already a friend invitation</span>
                         <span ng-show="post.author.isFriend">friend</span>
                     </div>
                     <img class="imgSmall" ng-src="{{post.wallOwner.profileImageData || '/sources/default.jpg'}}" />
-                    <a ng-click="showDetails[post.id][post.wallOwner.id] = !showDetails[post.id][post.wallOwner.id]" ng-bind="post.wallOwner.name"></a>'s wall
+                    <a class="username" ng-click="showDetails[post.id][post.wallOwner.id] = !showDetails[post.id][post.wallOwner.id]" ng-bind="post.wallOwner.name"></a>'s wall
                     <div class="popup" ng-show="showDetails[post.id][post.wallOwner.id]">
                         <img class="imgSmall" ng-src="{{post.wallOwner.profileImageData || '/sources/default.jpg'}}" />
-                        <a href="#/users/{{post.wallOwner.username}}" ng-bind="post.wallOwner.name"></a>
+                        <a class="username" href="#/users/{{post.wallOwner.username}}" ng-bind="post.wallOwner.name"></a>
                         <button ng-show="!post.wallOwner.isFriend && !post.wallOwner.hasPendingRequest && post.wallOwner.username != ownProfileData.username" ng-click="sendFriendRequest(post.wallOwner.username)" class="btn btn-info">Send Friend Request</button>
                         <span ng-show="post.wallOwner.hasPendingRequest">You have already send a friend invitation</span>
                         <span ng-show="post.wallOwner.isFriend">friend</span>
@@ -43,29 +43,27 @@
                 </div>
             </div>
             <div class="commentsWrapper post">
-                <div ng-repeat="comment in post.comments | orderBy: '+date' track by comment.id">
+                <div class="postComment" ng-repeat="comment in post.comments | orderBy: '+date' track by comment.id">
                     <p>
                         <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
-                        <a ng-click="showDetails[comment.id][comment.author.id] = !showDetails[comment.id][comment.author.id]" ng-bind="comment.author.name"></a>
+                        <a class="username" ng-click="showDetails[comment.id][comment.author.id] = !showDetails[comment.id][comment.author.id]" ng-bind="comment.author.name"></a>
+                        <span>{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
                         <div class="popup" ng-show="showDetails[comment.id][comment.author.id]">
                             <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
-                            <a href="#/users/{{comment.author.username}}" ng-bind="comment.author.name"></a>
+                            <a class="username" href="#/users/{{comment.author.username}}" ng-bind="comment.author.name"></a>
                             <button ng-show="!comment.author.isFriend && !comment.author.hasPendingRequest && comment.author.username != ownProfileData.username" ng-click="sendFriendRequest(comment.author.username)" class="btn btn-info">Send Friend Request</button>
                             <span ng-show="comment.author.hasPendingRequest">You have already send a friend invitation</span>
                             <span ng-show="comment.author.isFriend">friend</span>
                         </div>
                     </p>
-                    <p>
-                        {{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
-                    </p>
                     <div>
-                        <p ng-bind="comment.commentContent"></p>
+                        <p class="commentContent" ng-bind="comment.commentContent"></p>
                         <a ng-show="comment.liked" ng-click="unlikeComment(post.id,comment.id)">Unlike</a>
                         <a ng-hide="comment.liked" ng-click="likeComment(post.id,comment.id)">Like</a>
                         <span ng-bind="comment.likesCount"></span>
                     </div>
                 </div>
-                <div ng-show="post.comments.length>0">
+                <div ng-show="post.comments.length>0" class="allCommentsBtnWrapper">
                     <button ng-click="loadAllComments(post.id)" class="btn btn-default">Load all comments</button>
                 </div>
                 <div>
@@ -74,6 +72,11 @@
                         <input type="submit" value="Post comment" class="btn btn-primary" />
                     </form>
                 </div>
+            </div>
+        </div>
+        <div class="morePostsWrapper">
+            <button class="pager" ng-hide="noMorePosts" ng-click="loadMorePosts(lastPostId)">Load more posts</button>
+            <div class="noPosts" ng-show="noMorePosts"><span>There are no more posts</span>
             </div>
         </div>
     </div>

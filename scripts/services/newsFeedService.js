@@ -3,12 +3,15 @@
 socialNetwork.factory('newsFeedService', function ($http, $q, BASE_URL) {
     var feedService = {};
 
-    feedService.getNewsFeed = function () {
+    feedService.getNewsFeed = function (StartPostId) {
         var deferred = $q.defer();
-
+        var url = BASE_URL + 'me/feed?StartPostId&PageSize=5';
+        if (StartPostId) {
+            url = BASE_URL + 'me/feed?StartPostId=' + StartPostId + '&PageSize=5';
+        }
         var request = {
             method: 'GET',
-            url: BASE_URL + 'me/feed?StartPostId&PageSize=5',
+            url: url,
             headers: {
                 Authorization: 'Bearer ' + sessionStorage.accessToken
             }

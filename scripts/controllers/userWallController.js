@@ -14,6 +14,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
         userWallService.getFriendWall(username)
             .then(function (data) {
                 $scope.wallFeed = data;
+                $scope.lastPostId = data[data.length - 1].id;
             }, function (data) {
                 notifyService.error(data.message);
             });
@@ -27,6 +28,21 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
                 notifyService.error(data.message);
             });
     }
+
+    $scope.loadMoreUserPosts = function (username, lastPostId) {
+        userWallService.getFriendWall(username, lastPostId)
+            .then(function (data) {
+                $scope.wallFeed = $scope.wallFeed.concat(data);
+                if (data.length === 0) {
+                    $scope.noMorePosts = true;
+                } else {
+                    $scope.noMorePosts = false;
+                    $scope.lastPostId = data[data.length - 1].id;
+                }
+            }, function (data) {
+                notifyService.error(data.message);
+            });
+    };
 
     $scope.loadUserWallPage = function () {
         var username = $routeParams.username;

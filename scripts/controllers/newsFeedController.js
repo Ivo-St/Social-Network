@@ -1,14 +1,34 @@
 /* global socialNetwork */
 
 socialNetwork.controller('newsFeedController', function ($scope, newsFeedService, notifyService) {
-    function getNewsFeed() {
-        newsFeedService.getNewsFeed()
+    $scope.getNewsFeed = function (postId) {
+        newsFeedService.getNewsFeed(postId)
             .then(function (data) {
                 $scope.newsFeed = data;
+                if (data.length > 0) {
+                    $scope.lastPostId = data[data.length - 1].id;
+                } else {
+                    $scope.noMorePosts = true;
+                }
             }, function (data) {
                 notifyService.error(data.message);
             });
-    }
+    };
+
+    $scope.loadMorePosts = function (postId) {
+        newsFeedService.getNewsFeed(postId)
+            .then(function (data) {
+                $scope.newsFeed = $scope.newsFeed.concat(data);
+                if (data.length === 0) {
+                    $scope.noMorePosts = true;
+                } else {
+                    $scope.noMorePosts = false;
+                    $scope.lastPostId = data[data.length - 1].id;
+                }
+            }, function (data) {
+                notifyService.error(data.message);
+            });
+    };
 
     function getPostIndex(postId) {
         for (var index in $scope.newsFeed) {
@@ -100,5 +120,5 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     };
 
-    getNewsFeed();
+    $scope.getNewsFeed();
 });

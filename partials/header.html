@@ -1,26 +1,35 @@
 <div ng-controller="headerController" class="innerHeaderWrapper">
     <div id="userProfile">
-        <img ng-src="{{ownProfileData.profileImageData}}" id="profilePic" />
-        <span ng-bind="ownProfileData.name"></span>
+        <img ng-src="{{ownProfileData.profileImageData  || '/sources/default.jpg'}}" id="profilePic" />
+        <span class="username" ng-bind="ownProfileData.name"></span>
     </div>
     <div id="navigation">
-        <a href="#/user/home"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></a>
-        <a href="#/user/editProfile"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
-        <a href="#/user/changePassword"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
-        <a ng-click="showDetails = !showDetails"><span class="glyphicon glyphicon-user"><span ng-show="friendsRequests.length>0" class="badge" ng-bind="friendsRequests.length"></span></span></a>
+        <a href="#/user/home" title="News feed"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></a>
+        <a href="#/user/editProfile" title="Edit profile"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+        <a href="#/user/changePassword" title="Change Password"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
+        <a ng-click="showDetails = !showDetails" title="Show friend requests"><span class="glyphicon glyphicon-user"><span ng-show="friendsRequests.length>0" class="badge" ng-bind="friendsRequests.length"></span></span></a>
         <div class="popup" ng-show="showDetails">
             <div ng-hide="friendsRequests.length>0">
                 <span>Sorry. No new friends requests.</span>
             </div>
             <div ng-show="friendsRequests.length>0" ng-repeat="friendRequest in friendsRequests" class="friendRequests">
-                <img id="friendRequestPic" ng-src="{{friendRequest.user.profileImageData || '/sources/default.jpg'}}">
+                <img class="imgSmall" ng-src="{{friendRequest.user.profileImageData || '/sources/default.jpg'}}">
                 <span ng-bind="friendRequest.user.name"></span>
                 <button ng-click="acceptFriendRequest(friendRequest.id)" class="btn btn-success">Accept friend request</button>
                 <button ng-click="declineFriendRequest(friendRequest.id)" class="btn btn-danger">Decline friend request</button>
             </div>
         </div>
+        <a ng-click="logout()" title="Logout"><span class="glyphicon glyphicon-log-out"></span></a>
     </div>
-    <div id="right">
-        <a ng-click="logout()">Logout</a>
+    <div id="searchWrapper">
+        <input type="text" class="form-control" placeholder="Search user" ng-change="searchUsers()" ng-model="searchTerm">
+        <div class="popup" id="searchResultsWrapper" ng-show="searchResult.length>0">
+            <div class="searchUser" ng-repeat="user in searchResult">
+                <img class="imgSmall" ng-src="{{user.profileImageData || '/sources/default.jpg'}}" alt="">
+                <div>
+                    <a class="searchUser" title="Click to send friend request" ng-click="sendFriendRequest(user.username)" ng-bind="user.name"></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

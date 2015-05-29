@@ -1,4 +1,4 @@
-/* global socialNetwork */
+/* global socialNetwork, sessionStorage */
 
 socialNetwork.controller('authenticationController', function ($scope, $rootScope, $location, userAuthentication, notifyService) {
     $scope.login = function () {
@@ -6,11 +6,10 @@ socialNetwork.controller('authenticationController', function ($scope, $rootScop
             .then(function (data) {
                 notifyService.success('Succsesful login. Username: (' + data.userName + ')');
                 userAuthentication.saveCredentials(data);
-                $rootScope.isLoggedIn = true;
-                $location.path('/user/home');
 
                 // changes: see if this can be loaded in a better place
                 $scope.getOwnProfileData();
+                $location.path('/user/home');
             }, function (error) {
 
                 notifyService.error(error.error_description);
@@ -24,10 +23,10 @@ socialNetwork.controller('authenticationController', function ($scope, $rootScop
                 notifyService.success('Succsesful register. Username: (' + data.userName + ')');
                 userAuthentication.saveCredentials(data);
                 $rootScope.isLoggedIn = true;
-                $location.path('/user/home');
 
                 // changes: see if this can be loaded in a better place
                 $scope.getOwnProfileData();
+                $location.path('/user/home');
             }, function (error) {
                 notifyService.error(error.message);
                 console.log(error);
