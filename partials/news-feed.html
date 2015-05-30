@@ -2,6 +2,22 @@
     <div class="pageInfo">
         <h3>News feed</h3>
     </div>
+    <div id="userFriendsPreview" class="myFriendsPreview">
+        <p ng-if="myFriendsPreview.totalCount>0">
+            Total friends count:
+            <a href="#/user/friends">
+                <span ng-bind="myFriendsPreview.totalCount"></span>
+            </a>
+        </p>
+        <div>
+            <div id="friendPreview" ng-repeat="friend in myFriendsPreview.friends">
+                <div>
+                    <img class="imgSmall" ng-src="{{friend.profileImageData || '/sources/default.jpg'}}" />
+                    <a class="username" href="#/users/{{friend.username}}" ng-bind="friend.name"></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="contentWrapper">
         <div ng-repeat="post in newsFeed | orderBy: '-date' track by post.id" class="postWrapper">
             <div class="post">
