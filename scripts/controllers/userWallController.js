@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.controller('userWallController', function ($scope, $routeParams, userWallService, newsFeedService, friendsService, notifyService) {
+socialNetwork.controller('userWallController', function ($scope, $routeParams, $location, userWallService, newsFeedService, friendsService, notifyService) {
     function getUserFullData(username) {
         userWallService.getUserFullData(username)
             .then(function (data) {
@@ -46,40 +46,29 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
 
     $scope.loadUserWallPage = function () {
         var username = $routeParams.username;
-        getUserFullData(username);
-        getUserWall(username);
-        getUserFriendsPreview(username);
+        var myUsername;
+        if ($scope.ownProfileData) {
+            myUsername = $scope.ownProfileData.username;
+        }
+
+        if (username === myUsername) {
+            $location.path('/user/home');
+        } else {
+            getUserFullData(username);
+            getUserWall(username);
+            getUserFriendsPreview(username);
+        }
     };
 
-    function getPostIndex(postId) {
-        for (var index in $scope.wallFeed) {
-            if ($scope.wallFeed[index].id === postId) {
-                return index;
-            }
-        }
-
-        return -1;
-    }
-
-    function getCommentIndex(postIndex, commentId) {
-        for (var index in $scope.wallFeed[postIndex].comments) {
-            if ($scope.wallFeed[postIndex].comments[index].id === commentId) {
-                return index;
-            }
-        }
-
-        return -1;
-    }
-
     function appreciatePost(data, postId) {
-        var postIndex = getPostIndex(postId);
+        var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
         $scope.wallFeed[postIndex].liked = data.liked;
         $scope.wallFeed[postIndex].likesCount = data.likesCount;
     }
 
     function appreciateComment(data, postId, commentId) {
-        var postIndex = getPostIndex(postId);
-        var commentIndex = getCommentIndex(postIndex, commentId);
+        var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
+        var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.wallFeed);
         $scope.wallFeed[postIndex].comments[commentIndex].liked = data.liked;
         $scope.wallFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
     }
@@ -123,7 +112,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
     $scope.postComment = function (postId, commentContent) {
         newsFeedService.postComment(postId, commentContent)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
+                var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
                 $scope.wallFeed[postIndex].comments.unshift(data);
                 notifyService.success("Successfully posted comment");
             }, function (data) {
@@ -134,7 +123,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
     $scope.loadAllComments = function (postId) {
         newsFeedService.getPostComments(postId)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
+                var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
                 $scope.wallFeed[postIndex].comments = data;
             }, function (data) {
                 notifyService.error('An error occured. ' + data.message);
@@ -149,6 +138,18 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, u
                 notifyService.success('Post added successfully');
             }, function (data) {
                 notifyService.error(data.message);
+            });
+    };
+
+    $scope.deletePost = function (postId) {
+        newsFeedService.deletePost(postId)
+            .then(function (data) {
+                var index = $scope.getPostIndex(postId, $scope.wallFeed);
+                console.log(index);
+                $scope.wallFeed.splice(index, 1);
+                notifyService.success('Successfully deleted post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
             });
     };
 

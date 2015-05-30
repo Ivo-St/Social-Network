@@ -30,35 +30,15 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     };
 
-    function getPostIndex(postId) {
-        for (var index in $scope.newsFeed) {
-            if ($scope.newsFeed[index].id === postId) {
-                return index;
-            }
-        }
-
-        return -1;
-    }
-
-    function getCommentIndex(postIndex, commentId) {
-        for (var index in $scope.newsFeed[postIndex].comments) {
-            if ($scope.newsFeed[postIndex].comments[index].id === commentId) {
-                return index;
-            }
-        }
-
-        return -1;
-    }
-
     function appreciatePost(data, postId) {
-        var postIndex = getPostIndex(postId);
+        var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
         $scope.newsFeed[postIndex].liked = data.liked;
         $scope.newsFeed[postIndex].likesCount = data.likesCount;
     }
 
     function appreciateComment(data, postId, commentId) {
-        var postIndex = getPostIndex(postId);
-        var commentIndex = getCommentIndex(postIndex, commentId);
+        var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
+        var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.newsFeed);
         $scope.newsFeed[postIndex].comments[commentIndex].liked = data.liked;
         $scope.newsFeed[postIndex].comments[commentIndex].likesCount = data.likesCount;
     }
@@ -102,7 +82,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.postComment = function (postId, commentContent) {
         newsFeedService.postComment(postId, commentContent)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
+                var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
                 $scope.newsFeed[postIndex].comments.unshift(data);
                 notifyService.success("Successfully posted comment");
             }, function (data) {
@@ -113,7 +93,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.loadAllComments = function (postId) {
         newsFeedService.getPostComments(postId)
             .then(function (data) {
-                var postIndex = getPostIndex(postId);
+                var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
                 $scope.newsFeed[postIndex].comments = data;
             }, function (data) {
                 notifyService.error('An error occured. ' + data.message);
@@ -127,6 +107,18 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             }, function (data) {
                 notifyService.error(data.message);
                 console.log(data);
+            });
+    };
+
+    $scope.deletePost = function (postId) {
+        newsFeedService.deletePost(postId)
+            .then(function (data) {
+                var index = $scope.getPostIndex(postId, $scope.newsFeed);
+                console.log(index);
+                $scope.newsFeed.splice(index, 1);
+                notifyService.success('Successfully deleted post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
             });
     };
 

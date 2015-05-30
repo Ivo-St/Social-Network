@@ -1,6 +1,25 @@
 /* global socialNetwork */
 
 socialNetwork.controller('mainController', function ($scope, $location, userAuthentication, friendsService, notifyService) {
+    $scope.getPostIndex = function (postId, array) {
+        for (var index in array) {
+            if (array[index].id === postId) {
+                return index;
+            }
+        }
+
+        return -1;
+    };
+
+    $scope.getCommentIndex = function (postIndex, commentId, array) {
+        for (var index in array[postIndex].comments) {
+            if (array[postIndex].comments[index].id === commentId) {
+                return index;
+            }
+        }
+
+        return -1;
+    };
 
     // fixme: is this a good place for the function getOwnProfileData
     $scope.getOwnProfileData = function () {

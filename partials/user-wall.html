@@ -11,7 +11,7 @@
         </div>
     </div>
     <div>
-        <div id="userFriendsPreview">
+        <div ng-show="userProfile.isFriend" id="userFriendsPreview">
             <p ng-if="userFriendsPreview.totalCount>0">
                 Total friends count:
                 <a href="#/users/{{userProfile.username}}/friends">
@@ -49,6 +49,9 @@
                         <p class="date">
                             {{post.date|date:"'on' dd MM yyyy 'at' HH:mm"}}
                         </p>
+                        <div class="deletePost" ng-show="(post.wallOwner.username == ownProfileData.username) || post.author.username==ownProfileData.username">
+                            <button class="btn btn-danger removePostbtn" ng-click="deletePost(post.id)">Remove post</button>
+                        </div>
                     </div>
                     <div>
                         <p ng-bind="post.postContent"></p>

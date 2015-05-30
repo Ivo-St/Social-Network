@@ -436,3 +436,15 @@ input[type="button"] {
     word-wrap: break-word;
     overflow: hidden;
 }
+
+.deletePost {
+    margin-top: -30px;
+    margin-bottom: 1%;
+    text-align: right;
+}
+
+.removePostbtn {
+    padding: 1%;
+    font-size: 12px;
+    font-family: 'Indie Flower', cursive;
+}
