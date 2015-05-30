@@ -24,6 +24,27 @@ socialNetwork.factory('friendsService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    friendsService.getFriendsPreview = function () {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'GET',
+            url: BASE_URL + 'me/friends/preview',
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            }, function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     friendsService.getFriendFriendsPreview = function (username) {
         var deferred = $q.defer();
         var url = BASE_URL + 'users/' + username + '/friends/preview';
