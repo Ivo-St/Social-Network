@@ -4,7 +4,7 @@
         <span class="username" ng-bind="ownProfileData.name"></span>
     </div>
     <div id="navigation">
-        <a href="#/user/home" title="News feed"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span></a>
+        <a href="#/user/home" title="News feed"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
         <a href="#/user/editProfile" title="Edit profile"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
         <a href="#/user/changePassword" title="Change Password"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></a>
         <a ng-click="showDetails = !showDetails" title="Show friend requests"><span class="glyphicon glyphicon-user"><span ng-show="friendsRequests.length>0" class="badge" ng-bind="friendsRequests.length"></span></span></a>
@@ -19,6 +19,7 @@
                 <button ng-click="declineFriendRequest(friendRequest.id)" class="btn btn-danger">Decline friend request</button>
             </div>
         </div>
+        <a href="#/user/friends" title="Friends page"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a>
         <a ng-click="logout()" title="Logout"><span class="glyphicon glyphicon-log-out"></span></a>
     </div>
     <div id="searchWrapper">
