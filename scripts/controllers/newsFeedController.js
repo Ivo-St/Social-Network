@@ -1,6 +1,6 @@
 /* global socialNetwork */
 
-socialNetwork.controller('newsFeedController', function ($scope, newsFeedService, notifyService) {
+socialNetwork.controller('newsFeedController', function ($scope, newsFeedService, friendsService, notifyService) {
     $scope.getNewsFeed = function (postId) {
         newsFeedService.getNewsFeed(postId)
             .then(function (data) {
@@ -120,5 +120,16 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     };
 
+    $scope.getMyFriendsPreview = function () {
+        friendsService.getFriendsPreview()
+            .then(function (data) {
+                $scope.myFriendsPreview = data;
+            }, function (data) {
+                notifyService.error(data.message);
+                console.log(data);
+            });
+    };
+
     $scope.getNewsFeed();
+    $scope.getMyFriendsPreview();
 });
