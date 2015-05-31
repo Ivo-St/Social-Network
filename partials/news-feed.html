@@ -66,7 +66,7 @@
                     <p>
                         <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
                         <a class="username" ng-click="showDetails[comment.id][comment.author.id] = !showDetails[comment.id][comment.author.id]" ng-bind="comment.author.name"></a>
-                        <span>{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
+                        <span class="date">{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
                         <div class="popup" ng-show="showDetails[comment.id][comment.author.id]">
                             <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
                             <a class="username" href="#/users/{{comment.author.username}}" ng-bind="comment.author.name"></a>

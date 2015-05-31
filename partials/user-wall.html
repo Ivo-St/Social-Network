@@ -29,7 +29,8 @@
         </div>
         <div id="makePostWrapper">
             <form ng-submit="makePost()">
-                <input type="text" class="form-control" placeholder="Message..." ng-model="newPost.text" />
+                <label for="makePost">Submit a post</label>
+                <input type="text" id="makePost" class="form-control" placeholder="Make a post..." ng-model="newPost.text" />
             </form>
         </div>
         <div id="contentWrapper">
@@ -72,7 +73,7 @@
                         <p>
                             <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
                             <a class="username" ng-click="showDetails[comment.id][comment.author.id] = !showDetails[comment.id][comment.author.id]" ng-bind="comment.author.name"></a>
-                            <span>{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
+                            <span class="date">{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
                             <div class="popup" ng-show="showDetails[comment.id][comment.author.id]">
                                 <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
                                 <a class="username" href="#/users/{{comment.author.username}}" ng-bind="comment.author.name"></a>

@@ -425,6 +425,7 @@ input[type="button"] {
 #makePostWrapper {
     float: left;
     width: 22%;
+    text-align: center;
 }
 
 .postComment {
