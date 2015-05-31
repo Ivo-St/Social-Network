@@ -46,6 +46,19 @@ socialNetwork.controller('mainController', function ($scope, $location, userAuth
             });
     };
 
+    $scope.getFriendsUsernames = function () {
+        friendsService.getFriends()
+            .then(function (data) {
+                var usernames = [];
+                for (var index in data) {
+                    usernames.push(data[index].username);
+                }
+                $scope.friendUsernames = usernames;
+            }, function () {
+                $scope.friendUsernames = [];
+            });
+    };
+
     $scope.logout = function () {
         userAuthentication.logout()
             .then(function (data) {
@@ -60,4 +73,5 @@ socialNetwork.controller('mainController', function ($scope, $location, userAuth
     };
 
     $scope.isLoggedIn = userAuthentication.isLoggedIn();
+    $scope.getFriendsUsernames();
 });

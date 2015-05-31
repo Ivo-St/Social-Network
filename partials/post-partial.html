@@ -1,0 +1,20 @@
+<div>
+    <p ng-bind="post.postContent"></p>
+    <a class="editPost" ng-show="post.author.username==ownProfileData.username" ng-click="editPost[post.id][post.wallOwner.id] = !editPost[post.id][post.wallOwner.id]"><span class="glyphicon glyphicon-pencil innerGlyph"></span></a>
+    <div ng-show="editPost[post.id][post.wallOwner.id]" class="popup">
+        <form ng-submit="editPost(post.id)">
+            <input type="text" class="form-control editPostText" placeholder="Post's new text" ng-model="editPost.postContent" />
+            <input type="submit" class="btn btn-success">
+        </form>
+    </div>
+    <a ng-show="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
+    <a ng-hide="post.liked" ng-click="likePost(post.id)">Like</a>
+    <div class="appreciatePost">
+        <p ng-show="post.liked">
+            You <span ng-if="(post.likesCount-1)>0">and <span ng-bind="post.likesCount-1"></span> other people</span> like this.
+        </p>
+        <p ng-hide="post.liked">
+            <span ng-bind="post.likesCount"></span> people like this.
+        </p>
+    </div>
+</div>

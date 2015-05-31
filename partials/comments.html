@@ -1,0 +1,40 @@
+<div class="commentsWrapper post">
+    <div class="postComment" ng-repeat="comment in post.comments | orderBy: '+date' track by comment.id">
+        <p>
+            <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
+            <a class="username" ng-click="showDetails[comment.id][comment.author.id] = !showDetails[comment.id][comment.author.id]" ng-bind="comment.author.name"></a>
+            <span class="date">{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
+            <a ng-show="comment.author.username==ownProfileData.username" ng-click="deleteComment(post.id,comment.id)"><span class="glyphicon glyphicon-remove innerGlyph removeComment"></span></a>
+            <div class="popup" ng-show="showDetails[comment.id][comment.author.id]">
+                <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
+                <a class="username" href="#/users/{{comment.author.username}}" ng-bind="comment.author.name"></a>
+                <button ng-show="!comment.author.isFriend && !comment.author.hasPendingRequest && comment.author.username != ownProfileData.username && friendUsernames.indexOf(comment.author.username) == -1" ng-click="sendFriendRequest(comment.author.username)" class="btn btn-info">Send Friend Request</button>
+                <span ng-show="comment.author.hasPendingRequest">You have already send a friend invitation</span>
+                <span ng-show="comment.author.isFriend || friendUsernames.indexOf(comment.author.username) != -1">friend</span>
+            </div>
+        </p>
+        <div>
+            <p class="commentContent" ng-bind="comment.commentContent"></p>
+            <a class="editPost" ng-show="comment.author.username==ownProfileData.username" ng-click="editComment[comment.id] = !editComment[comment.id]"><span class="glyphicon glyphicon-pencil innerGlyph"></span></a>
+            <div ng-show="editComment[comment.id]" class="popup">
+                <form ng-submit="editComment(post.id,comment.id)">
+                    <input type="text" class="form-control editPostText" placeholder="Post's new text" ng-model="editComment.commentContent" />
+                    <input type="submit" class="btn btn-success">
+                </form>
+            </div>
+            <a ng-show="comment.liked" ng-click="unlikeComment(post.id,comment.id)">Unlike</a>
+            <a ng-hide="comment.liked" ng-click="likeComment(post.id,comment.id)">Like</a>
+            <span ng-bind="comment.likesCount"></span>
+        </div>
+    </div>
+    <div ng-show="post.comments.length>0" class="allCommentsBtnWrapper">
+        <button ng-click="loadAllComments(post.id)" class="btn btn-default">Load all comment. <span><span ng-bind="post.totalCommentsCount"></span> in total.</span>
+        </button>
+    </div>
+    <div>
+        <form ng-submit="postComment(post.id,commentContent[post.id])" class="makeComment">
+            <input type="text" class="form-control comment" placeholder="Add comment" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
+            <input type="submit" value="Post comment" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

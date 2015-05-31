@@ -145,6 +145,19 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
             });
     };
 
+    $scope.editComment = function (postId, commentId) {
+        var newContent = $scope.editComment.commentContent;
+        newsFeedService.editComment(postId, commentId, newContent)
+            .then(function (data) {
+                var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
+                var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.newsFeed);
+                $scope.newsFeed[postIndex].comments[commentIndex].commentContent = newContent;
+                notifyService.success('Successfully edited post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
+            });
+    };
+
     $scope.getNewsFeed();
     $scope.getMyFriendsPreview();
 });

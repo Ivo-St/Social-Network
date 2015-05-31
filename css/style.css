@@ -336,6 +336,7 @@ input[type="button"] {
 
 .allCommentsBtnWrapper {
     margin-bottom: 1%;
+    text-align: center;
 }
 
 .postHeader {

@@ -47,60 +47,9 @@
                         <button class="btn btn-danger removePostbtn" ng-click="deletePost(post.id)">Remove post</button>
                     </div>
                 </div>
-                <div>
-                    <p ng-bind="post.postContent"></p>
-                    <a class="editPost" ng-show="post.author.username==ownProfileData.username" ng-click="editPost[post.id][post.wallOwner.id] = !editPost[post.id][post.wallOwner.id]"><span class="glyphicon glyphicon-pencil innerGlyph"></span></a>
-                    <div ng-show="editPost[post.id][post.wallOwner.id]" class="popup">
-                        <form ng-submit="editPost(post.id)">
-                            <input type="text" class="form-control editPostText" placeholder="Post's new text" ng-model="editPost.postContent" />
-                            <input type="submit" class="btn btn-success">
-                        </form>
-                    </div>
-                    <a ng-show="post.liked" ng-click="unlikePost(post.id)">Unlike</a>
-                    <a ng-hide="post.liked" ng-click="likePost(post.id)">Like</a>
-                    <div class="appreciatePost">
-                        <p ng-show="post.liked">
-                            You <span ng-if="(post.likesCount-1)>0">and <span ng-bind="post.likesCount-1"></span> other people</span> like this.
-                        </p>
-                        <p ng-hide="post.liked">
-                            <span ng-bind="post.likesCount"></span> people like this.
-                        </p>
-                    </div>
-                </div>
+                <div ng-include="'partials/post-partial.html'"></div>
             </div>
-            <div class="commentsWrapper post">
-                <div class="postComment" ng-repeat="comment in post.comments | orderBy: '+date' track by comment.id">
-                    <p>
-                        <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
-                        <a class="username" ng-click="showDetails[comment.id][comment.author.id] = !showDetails[comment.id][comment.author.id]" ng-bind="comment.author.name"></a>
-                        <span class="date">{{comment.date|date:"'on' dd MM yyyy 'at' HH:mm"}}</span>
-                        <a ng-show="comment.author.username==ownProfileData.username" ng-click="deleteComment(post.id,comment.id)"><span class="glyphicon glyphicon-remove innerGlyph removeComment"></span></a>
-                        <div class="popup" ng-show="showDetails[comment.id][comment.author.id]">
-                            <img class="imgSmall" ng-src="{{comment.author.profileImageData || '/sources/default.jpg'}}" />
-                            <a class="username" href="#/users/{{comment.author.username}}" ng-bind="comment.author.name"></a>
-                            <button ng-show="!comment.author.isFriend && !comment.author.hasPendingRequest && comment.author.username != ownProfileData.username" ng-click="sendFriendRequest(comment.author.username)" class="btn btn-info">Send Friend Request</button>
-                            <span ng-show="comment.author.hasPendingRequest">You have already send a friend invitation</span>
-                            <span ng-show="comment.author.isFriend">friend</span>
-                        </div>
-                    </p>
-                    <div>
-                        <p class="commentContent" ng-bind="comment.commentContent"></p>
-                        <a ng-show="comment.liked" ng-click="unlikeComment(post.id,comment.id)">Unlike</a>
-                        <a ng-hide="comment.liked" ng-click="likeComment(post.id,comment.id)">Like</a>
-                        <span ng-bind="comment.likesCount"></span>
-                    </div>
-                </div>
-                <div ng-show="post.comments.length>0" class="allCommentsBtnWrapper">
-                    <button ng-click="loadAllComments(post.id)" class="btn btn-default">Load all comment. <span><span ng-bind="post.totalCommentsCount"></span> in total.</span>
-                    </button>
-                </div>
-                <div>
-                    <form ng-submit="postComment(post.id,commentContent[post.id])" class="makeComment">
-                        <input type="text" class="form-control comment" placeholder="Add comment" ng-model="commentContent[post.id]" id="comment{{post.id}}" />
-                        <input type="submit" value="Post comment" class="btn btn-primary" />
-                    </form>
-                </div>
-            </div>
+            <div ng-include="'partials/comments.html'"></div>
         </div>
         <div class="morePostsWrapper">
             <button class="pager" ng-hide="noMorePosts" ng-click="loadMorePosts(lastPostId)">Load more posts</button>

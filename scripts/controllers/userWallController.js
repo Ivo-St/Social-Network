@@ -153,5 +153,42 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, $
             });
     };
 
+    $scope.editPost = function (postId) {
+        var newContent = $scope.editPost.postContent;
+        newsFeedService.editPost(postId, newContent)
+            .then(function (data) {
+                var index = $scope.getPostIndex(postId, $scope.wallFeed);
+                $scope.wallFeed[index].postContent = newContent;
+                notifyService.success('Successfully edited post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
+            });
+    };
+
+    $scope.deleteComment = function (postId, commentId) {
+        newsFeedService.deleteComment(postId, commentId)
+            .then(function (data) {
+                var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
+                var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.wallFeed);
+                $scope.wallFeed[postIndex].comments.splice(commentIndex, 1);
+                notifyService.success('Successfully deleted comment');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
+            });
+    };
+
+    $scope.editComment = function (postId, commentId) {
+        var newContent = $scope.editComment.commentContent;
+        newsFeedService.editComment(postId, commentId, newContent)
+            .then(function (data) {
+                var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
+                var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.wallFeed);
+                $scope.wallFeed[postIndex].comments[commentIndex].commentContent = newContent;
+                notifyService.success('Successfully edited post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
+            });
+    };
+
     $scope.loadUserWallPage();
 });
