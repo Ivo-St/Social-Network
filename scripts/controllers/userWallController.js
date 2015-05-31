@@ -143,7 +143,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, $
 
     $scope.deletePost = function (postId) {
         newsFeedService.deletePost(postId)
-            .then(function (data) {
+            .then(function () {
                 var index = $scope.getPostIndex(postId, $scope.wallFeed);
                 console.log(index);
                 $scope.wallFeed.splice(index, 1);
@@ -156,7 +156,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, $
     $scope.editPost = function (postId) {
         var newContent = $scope.editPost.postContent;
         newsFeedService.editPost(postId, newContent)
-            .then(function (data) {
+            .then(function () {
                 var index = $scope.getPostIndex(postId, $scope.wallFeed);
                 $scope.wallFeed[index].postContent = newContent;
                 notifyService.success('Successfully edited post');
@@ -167,7 +167,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, $
 
     $scope.deleteComment = function (postId, commentId) {
         newsFeedService.deleteComment(postId, commentId)
-            .then(function (data) {
+            .then(function () {
                 var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
                 var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.wallFeed);
                 $scope.wallFeed[postIndex].comments.splice(commentIndex, 1);
@@ -180,7 +180,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, $
     $scope.editComment = function (postId, commentId) {
         var newContent = $scope.editComment.commentContent;
         newsFeedService.editComment(postId, commentId, newContent)
-            .then(function (data) {
+            .then(function () {
                 var postIndex = $scope.getPostIndex(postId, $scope.wallFeed);
                 var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.wallFeed);
                 $scope.wallFeed[postIndex].comments[commentIndex].commentContent = newContent;

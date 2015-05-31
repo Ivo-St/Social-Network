@@ -112,7 +112,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
 
     $scope.deletePost = function (postId) {
         newsFeedService.deletePost(postId)
-            .then(function (data) {
+            .then(function () {
                 var index = $scope.getPostIndex(postId, $scope.newsFeed);
                 $scope.newsFeed.splice(index, 1);
                 notifyService.success('Successfully deleted post');
@@ -124,7 +124,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.editPost = function (postId) {
         var newContent = $scope.editPost.postContent;
         newsFeedService.editPost(postId, newContent)
-            .then(function (data) {
+            .then(function () {
                 var index = $scope.getPostIndex(postId, $scope.newsFeed);
                 $scope.newsFeed[index].postContent = newContent;
                 notifyService.success('Successfully edited post');
@@ -135,7 +135,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
 
     $scope.deleteComment = function (postId, commentId) {
         newsFeedService.deleteComment(postId, commentId)
-            .then(function (data) {
+            .then(function () {
                 var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
                 var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.newsFeed);
                 $scope.newsFeed[postIndex].comments.splice(commentIndex, 1);
@@ -148,7 +148,7 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
     $scope.editComment = function (postId, commentId) {
         var newContent = $scope.editComment.commentContent;
         newsFeedService.editComment(postId, commentId, newContent)
-            .then(function (data) {
+            .then(function () {
                 var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
                 var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.newsFeed);
                 $scope.newsFeed[postIndex].comments[commentIndex].commentContent = newContent;
