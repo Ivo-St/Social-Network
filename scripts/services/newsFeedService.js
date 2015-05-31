@@ -185,5 +185,51 @@ socialNetwork.factory('newsFeedService', function ($http, $q, BASE_URL) {
         return deferred.promise;
     };
 
+    feedService.editPost = function (postId, data) {
+        var deferred = $q.defer();
+        var request = {
+            method: 'PUT',
+            url: BASE_URL + 'Posts/' + postId,
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            },
+            data: {
+                postContent: data
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
+    feedService.deleteComment = function (postId, commentId) {
+        var deferred = $q.defer();
+
+        var request = {
+            method: 'DELETE',
+            url: BASE_URL + 'posts/' + postId + '/comments/' + commentId,
+            headers: {
+                Authorization: 'Bearer ' + sessionStorage.accessToken
+            }
+        };
+
+        $http(request)
+            .success(function (data) {
+                deferred.resolve(data);
+            })
+            .error(function (data) {
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    };
+
     return feedService;
 });

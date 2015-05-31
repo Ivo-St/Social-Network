@@ -114,9 +114,32 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
         newsFeedService.deletePost(postId)
             .then(function (data) {
                 var index = $scope.getPostIndex(postId, $scope.newsFeed);
-                console.log(index);
                 $scope.newsFeed.splice(index, 1);
                 notifyService.success('Successfully deleted post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
+            });
+    };
+
+    $scope.editPost = function (postId) {
+        var newContent = $scope.editPost.postContent;
+        newsFeedService.editPost(postId, newContent)
+            .then(function (data) {
+                var index = $scope.getPostIndex(postId, $scope.newsFeed);
+                $scope.newsFeed[index].postContent = newContent;
+                notifyService.success('Successfully edited post');
+            }, function (data) {
+                notifyService.error('An error occured. ' + data.message);
+            });
+    };
+
+    $scope.deleteComment = function (postId, commentId) {
+        newsFeedService.deleteComment(postId, commentId)
+            .then(function (data) {
+                var postIndex = $scope.getPostIndex(postId, $scope.newsFeed);
+                var commentIndex = $scope.getCommentIndex(postIndex, commentId, $scope.newsFeed);
+                $scope.newsFeed[postIndex].comments.splice(commentIndex, 1);
+                notifyService.success('Successfully deleted comment');
             }, function (data) {
                 notifyService.error('An error occured. ' + data.message);
             });

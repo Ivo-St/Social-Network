@@ -449,3 +449,20 @@ input[type="button"] {
     font-size: 12px;
     font-family: 'Indie Flower', cursive;
 }
+
+.editPost {
+    margin-right: 1%;
+}
+
+.editPostText {
+    display: initial;
+    width: inherit;
+}
+
+.innerGlyph {
+    position: initial;
+}
+
+.removeComment {
+    float: right;
+}
