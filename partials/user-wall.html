@@ -59,8 +59,8 @@
                 <div ng-include="'partials/comments.html'"></div>
             </div>
             <div class="morePostsWrapper">
-                <button class="pager" ng-hide="noMorePosts" ng-click="loadMoreUserPosts(userProfile.username, lastPostId)">Load more posts</button>
-                <div class="noPosts" ng-show="noMorePosts"><span>There are no more posts</span>
+                <button class="pager" ng-hide="noMorePosts || wallFeed.length==0" ng-click="loadMoreUserPosts(userProfile.username, lastPostId)">Load more posts</button>
+                <div class="noPosts" ng-show="noMorePosts || wallFeed.length==0"><span>There are no <span ng-hide="wallFeed.length==0">more </span>posts</span>
                 </div>
             </div>
         </div>

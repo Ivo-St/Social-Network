@@ -46,6 +46,7 @@ socialNetwork.controller('userWallController', function ($scope, $routeParams, $
 
     $scope.loadUserWallPage = function () {
         var username = $routeParams.username;
+        $scope.getFriendsUsernames();
         var myUsername;
         if ($scope.ownProfileData) {
             myUsername = $scope.ownProfileData.username;

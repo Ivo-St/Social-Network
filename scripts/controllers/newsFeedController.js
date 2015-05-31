@@ -160,4 +160,5 @@ socialNetwork.controller('newsFeedController', function ($scope, newsFeedService
 
     $scope.getNewsFeed();
     $scope.getMyFriendsPreview();
+    $scope.getFriendsUsernames();
 });

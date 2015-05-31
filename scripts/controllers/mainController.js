@@ -34,6 +34,11 @@ socialNetwork.controller('mainController', function ($scope, $location, userAuth
             }, function (data) {
                 notifyService.error(data.message);
                 console.log(data);
+                userAuthentication.clearCredentials();
+                userAuthentication.clearUserData();
+                $scope.isLoggedIn = false;
+                $location.path('/');
+                console.log(data);
             });
     };
 
@@ -73,5 +78,7 @@ socialNetwork.controller('mainController', function ($scope, $location, userAuth
     };
 
     $scope.isLoggedIn = userAuthentication.isLoggedIn();
-    $scope.getFriendsUsernames();
+    if ($scope.isLoggedIn) {
+        $scope.getFriendsUsernames();
+    }
 });
